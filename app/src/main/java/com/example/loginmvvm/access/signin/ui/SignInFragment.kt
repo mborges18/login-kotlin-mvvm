@@ -1,6 +1,5 @@
 package com.example.loginmvvm.access.signin.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -80,7 +79,7 @@ class SignInFragment: Fragment() {
     private fun observerSuccessSignIn(){
         viewModel.signInSuccessResponse.observe(viewLifecycleOwner) {
             if (it) {
-                startActivity(Intent(context, MainActivity::class.java))
+                startActivity(MainActivity.newIntent(requireContext()))
                 activity?.finish()
             }
         }
