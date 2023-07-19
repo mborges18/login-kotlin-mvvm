@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.widget.FrameLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
@@ -13,12 +13,11 @@ import com.bumptech.glide.request.target.ImageViewTarget
 import com.compdesign.R
 import com.compdesign.databinding.CompPrimeButtonBinding
 
-
 class CompPrimeButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
-): FrameLayout(context, attrs, defStyle) {
+): ConstraintLayout(context, attrs, defStyle) {
 
     private var icon: Int = 0
     private var title: String = ""
