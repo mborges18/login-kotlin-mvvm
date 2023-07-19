@@ -11,7 +11,7 @@ class SignInFragmentTest {
 
     @Test
     fun `given open screen then show components`() {
-        val scenario = launchFragmentInContainer<SignInFragment>(themeResId = R.style.Theme_LoginMvvm)
+        val scenario = launchFragmentInContainer<SignInFragment>(themeResId = R.style.AppTheme_NoActionBar)
         scenario.onFragment { fragment ->
             SignInFragmentRobot().start(fragment) {
                 it.checkIsVisibleTitle()

@@ -36,14 +36,14 @@ class SignInFragmentRobot {
     }
 
     fun checkIsVisibleDescription() {
-//        Assert.assertEquals(
-//            true,
-//            fragment?.view?.findViewById<TextView>(R.id.txv_description)?.isVisible
-//        )
-//        Assert.assertEquals(
-//            "Informe seu e-mail e senha para acessar a sua área.",
-//            fragment?.view?.findViewById<TextView>(R.id.txv_description)?.text.toString()
-//        )
+        Assert.assertEquals(
+            true,
+            fragment?.view?.findViewById<TextView>(R.id.txv_description)?.isVisible
+        )
+        Assert.assertEquals(
+            "Informe seu e-mail e senha para acessar a sua área.",
+            fragment?.view?.findViewById<TextView>(R.id.txv_description)?.text.toString()
+        )
     }
 
     fun checkIsVisibleInputEmail() {
@@ -68,9 +68,9 @@ class SignInFragmentRobot {
 
     fun checkIsVisibleButton() {
         Assert.assertEquals(true, fragment?.view?.findViewById<CompPrimeButton>(R.id.btn_signin)?.isVisible)
-//        Assert.assertEquals(
-//            "Entrar",
-//            fragment?.view?.findViewById<TextView>(R.id.cpb_title)?.text.toString()
-//        )
+        Assert.assertEquals(
+            "Entrar",
+            fragment?.view?.findViewById<TextView>(R.id.cpb_title)?.text.toString()
+        )
     }
 }
