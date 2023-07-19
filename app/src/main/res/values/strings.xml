@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Login Mvvm</string>
+    <string name="app_description">Desenvolvido em Kotlin</string>
 </resources>
