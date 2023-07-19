@@ -37,7 +37,7 @@ class SignInFragment: Fragment() {
         binding.cdtPassword.setListener {
             viewModel.setPassword(it)
         }
-        binding.btnSignIn.setClickListener {
+        binding.btnSignin.setClickListener {
             val keepLogged = binding.swtKeepLogged.isChecked
             viewModel.signIn(keepLogged)
         }
@@ -56,16 +56,16 @@ class SignInFragment: Fragment() {
     private fun observerLoading(){
         viewModel.isLoading.observe(viewLifecycleOwner) {
             if(it) {
-                binding.btnSignIn.showLoading()
+                binding.btnSignin.showLoading()
             } else {
-                binding.btnSignIn.hideLoading()
+                binding.btnSignin.hideLoading()
             }
         }
     }
 
     private fun observerEnableButton() {
         viewModel.enableButton.observe(viewLifecycleOwner) {
-            binding.btnSignIn.bindEnabled(it)
+            binding.btnSignin.bindEnabled(it)
         }
     }
 

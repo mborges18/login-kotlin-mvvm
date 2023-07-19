@@ -9,7 +9,7 @@
     app:cardCornerRadius="@dimen/space_4dp">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/cpbTitle"
+        android:id="@+id/cpb_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -29,7 +29,7 @@
         tools:text="Title" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/cpbLoader"
+        android:id="@+id/cpb_loader"
         android:layout_width="25dp"
         android:layout_height="15dp"
         android:layout_gravity="center"

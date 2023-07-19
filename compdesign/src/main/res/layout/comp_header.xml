@@ -7,7 +7,7 @@
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
     <ImageView
-        android:id="@+id/btnClose"
+        android:id="@+id/btn_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/desc_image"
@@ -17,30 +17,29 @@
         android:visibility="gone"/>
 
     <TextView
-        android:id="@+id/txvTitle"
+        android:id="@+id/txv_title"
         style="@style/TitleLarge"
         android:layout_marginTop="@dimen/space_32dp"
         android:drawablePadding="@dimen/space_8dp"
         tools:text="Título"
-        app:drawableEndCompat="@drawable/ic_new_unlock"
+        tools:drawableEndCompat="@drawable/ic_new_unlock"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txvSubTitle"
+        android:id="@+id/txv_subtitle"
         style="@style/TitleMedium"
         android:layout_marginTop="@dimen/space_16dp"
         tools:text="Subtítulo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txvTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/txv_title" />
 
     <TextView
-        android:id="@+id/txvDescription"
+        android:id="@+id/txv_description"
         style="@style/TextNormal"
         android:layout_marginTop="@dimen/space_4dp"
         tools:text="Descrição"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txvSubTitle" />
-
+        app:layout_constraintTop_toBottomOf="@+id/txv_subtitle" />
 </merge>

@@ -47,7 +47,7 @@ class CompHeader @JvmOverloads constructor(
     private fun handlerComponents(title: String, icon: Int, subTitle: String, description: String) = with(binding) {
         txvTitle.text = title
         txvTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, icon, 0)
-        txvSubTitle.text = subTitle
+        txvSubtitle.text = subTitle
         txvDescription.text = description
     }
 }
