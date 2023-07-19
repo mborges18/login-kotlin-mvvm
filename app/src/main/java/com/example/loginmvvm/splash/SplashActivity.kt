@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import com.example.loginmvvm.access.AccessActivity
 import com.example.loginmvvm.databinding.ActivitySplashBinding
 
 @SuppressLint("CustomSplashScreen")
@@ -21,6 +22,7 @@ class SplashActivity: AppCompatActivity() {
 
     private fun handlerScreens() {
         Handler(Looper.getMainLooper()).postDelayed({
+            startActivity(AccessActivity.newIntent(this))
         }, TIMER)
     }
 

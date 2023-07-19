@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Comp Design</string>
+
+    <string name="desc_image">Imagem</string>
+    <string name="desc_text">Texto</string>
+
+</resources>
