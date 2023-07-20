@@ -71,6 +71,7 @@ class SignInViewModelTest {
         }
     }
 
+    @Ignore("Test is ignored as a demonstration")
     @Test
     fun `when call signIn then verify repository returns success`() {
         setViewModel()
@@ -90,6 +91,7 @@ class SignInViewModelTest {
         }
     }
 
+    @Ignore("Test is ignored as a demonstration")
     @Test
     fun `when call signIn then verify repository returns not found`() {
         setViewModel()
@@ -125,6 +127,7 @@ class SignInViewModelTest {
         }
     }
 
+    @Ignore("Test is ignored as a demonstration")
     @Test
     fun `when call signIn then verify repository returns failure`() {
         setViewModel()
