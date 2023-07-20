@@ -53,7 +53,7 @@ jobs:
       - name: Run tests UI
         uses: emulator-wtf/run-tests@v0
         with:
-          api-token: ${{ secrets.EW_API_TOKEN }}
+          # api-token: ${{ secrets.EW_API_TOKEN }}
           app: app/build/outputs/apk/debug/app-debug.apk
           test: app/build/outputs/apk/androidTest/app-debug-androidTest.apk
           outputs-dir: build/test-results
