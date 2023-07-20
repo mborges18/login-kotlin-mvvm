@@ -40,14 +40,26 @@ jobs:
           java-version: '17'
           cache: 'gradle'
           
+      #- name: Run Instrumentation Tests
+      #  uses: reactivecircus/android-emulator-runner@v2
+      #  with:
+      #    api-level: 27
+      #    target: default
+      #    arch: x86
+      #    profile: Nexus 6
+      #    script: ./gradlew connectedCheck --stacktrace
+      
+      
       - name: Run Instrumentation Tests
-        uses: reactivecircus/android-emulator-runner@v2
+        uses: malinskiy/action-android/emulator-run-cmd@release/0.0.3
         with:
-          api-level: 27
-          target: default
-          arch: x86
-          profile: Nexus 6
-          script: ./gradlew connectedCheck --stacktrace
+          cmd: ./gradlew connectedCheck --stacktrace
+          api: 27
+          tag: default
+          abi: x86
+
+      - name: Reclaim Memory
+        run: ./gradlew --stop && jps|grep -E 'KotlinCompileDaemon|GradleDaemon'| awk '{print $1}'| xargs kill -9
 
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
@@ -56,7 +68,7 @@ jobs:
       - name: Run gradle tests
         run: ./gradlew test
         
-      - name: Run gradle tests UI
+      - name: Build APK tests UI
         run: ./gradlew assembleDebug assembleAndroidTest
 
       # Run Build Project
