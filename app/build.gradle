@@ -47,6 +47,8 @@ android {
 
 dependencies {
     implementation project(path: ':compdesign')
+    testImplementation project(path: ':app')
+    androidTestImplementation project(path: ':app')
 
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -89,14 +91,19 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
 
+    //Espresso
+    def espresso_version= "3.5.1"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espresso_version"
+
+    androidTestImplementation 'androidx.test:rules:1.5.0'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+
     //InstantTaskExecutorRule
     implementation 'androidx.arch.core:core-testing:2.2.0'
 
     //Dispatchers
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
-
-    //Espresso
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     //Fragment
     debugImplementation 'androidx.fragment:fragment-testing:1.6.0'
@@ -105,13 +112,19 @@ dependencies {
     testImplementation 'io.mockk:mockk:1.13.3'
 
     //Mock webservice
+    def mock_webserver_version= "4.10.0"
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.2"))
-    testImplementation 'com.squareup.okhttp3:mockwebserver:4.10.0'
-    androidTestImplementation 'com.squareup.okhttp3:mockwebserver:4.10.0'
+    testImplementation "com.squareup.okhttp3:mockwebserver:$mock_webserver_version"
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:$mock_webserver_version"
 
     //Robolectric
     testImplementation 'org.robolectric:robolectric:4.10.3'
 
     debugImplementation 'androidx.test:monitor:1.6.1'
     androidTestImplementation 'org.hamcrest:hamcrest:2.2'
+
+    //-------------
+    testImplementation "androidx.test:core-ktx:1.5.0"
+    implementation "androidx.test:core:1.5.0"
+    androidTestImplementation "androidx.test:core-ktx:1.5.0"
 }
