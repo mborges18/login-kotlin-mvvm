@@ -110,7 +110,9 @@ dependencies {
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
 
     //Fragment
-    debugImplementation 'androidx.fragment:fragment-testing:1.6.0'
+    debugImplementation ('androidx.fragment:fragment-testing:1.6.0'){
+        exclude group:'androidx.test', module:'monitor'
+    }
 
     //Mockk
     testImplementation 'io.mockk:mockk:1.13.3'
