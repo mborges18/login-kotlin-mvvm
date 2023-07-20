@@ -25,6 +25,9 @@ jobs:
     
     - name: Run test
       run: ./gradlew test
+      
+    - name: Build gradle project
+      run: ./gradlew build
 
-    - name: Build with Gradle
+    - name: Build apk debug project (APK)
       run: ./gradlew assembleDebug
