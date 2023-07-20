@@ -1,5 +1,6 @@
 package com.example.loginmvvm.access.signin.ui
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.loginmvvm.R
@@ -7,6 +8,7 @@ import io.mockk.clearAllMocks
 import io.mockk.unmockkAll
 import org.junit.AfterClass
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.core.context.stopKoin
@@ -17,6 +19,9 @@ import org.robolectric.annotation.LooperMode
 @RunWith(AndroidJUnit4::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class SignInFragmentTest {
+
+    @get:Rule
+    val executorRule = InstantTaskExecutorRule()
 
     @Before
     fun setup() {
