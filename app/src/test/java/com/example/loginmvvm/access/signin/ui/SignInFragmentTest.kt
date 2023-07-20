@@ -5,8 +5,10 @@ import com.example.loginmvvm.R
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
+@Config(minSdk = 29)
 class SignInFragmentTest {
 
     @Test
