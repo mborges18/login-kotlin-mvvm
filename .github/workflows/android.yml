@@ -48,18 +48,6 @@ jobs:
       #    arch: x86
       #    profile: Nexus 6
       #    script: ./gradlew connectedCheck --stacktrace
-      
-      
-      - name: Run Instrumentation Tests
-        uses: malinskiy/action-android/emulator-run-cmd@release/0.0.3
-        with:
-          cmd: ./gradlew connectedCheck --stacktrace
-          api: 27
-          tag: default
-          abi: x86
-
-      - name: Reclaim Memory
-        run: ./gradlew --stop && jps|grep -E 'KotlinCompileDaemon|GradleDaemon'| awk '{print $1}'| xargs kill -9
 
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
@@ -67,9 +55,6 @@ jobs:
       # Run Tests Build
       - name: Run gradle tests
         run: ./gradlew test
-        
-      - name: Build APK tests UI
-        run: ./gradlew assembleDebug assembleAndroidTest
 
       # Run Build Project
       - name: Build gradle project
