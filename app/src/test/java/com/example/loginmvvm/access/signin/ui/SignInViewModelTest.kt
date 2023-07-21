@@ -85,9 +85,7 @@ class SignInViewModelTest {
         viewModel.signIn(keepLogged = true)
 
         verify {
-            if(responseSuccess is ResultState.Success){
-                signInObserver.onChanged(responseSuccess.data)
-            }
+            signInObserver.onChanged(true)
         }
     }
 
