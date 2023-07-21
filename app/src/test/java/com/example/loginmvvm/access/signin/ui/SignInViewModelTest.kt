@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import com.example.loginmvvm.access.signin.data.repository.SignInRepository
 import com.example.loginmvvm.access.signin.model.SignInModel
 import com.example.loginmvvm.common.result.ResultState
+import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -17,7 +18,6 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 
@@ -69,9 +69,9 @@ class SignInViewModelTest {
         coVerify {
             repository.signIn(keepLogged = true, model = model)
         }
+        clearAllMocks()
     }
 
-    @Ignore("Test is ignored as a demonstration")
     @Test
     fun `when call signIn then verify repository returns success`() {
         setViewModel()
@@ -89,9 +89,9 @@ class SignInViewModelTest {
                 signInObserver.onChanged(responseSuccess.data)
             }
         }
+        clearAllMocks()
     }
 
-    @Ignore("Test is ignored as a demonstration")
     @Test
     fun `when call signIn then verify repository returns not found`() {
         setViewModel()
@@ -107,9 +107,9 @@ class SignInViewModelTest {
         verify {
             signInObserver.onChanged(true)
         }
+        clearAllMocks()
     }
 
-    @Ignore("Test is ignored as a demonstration")
     @Test
     fun `when call signIn then verify repository returns error`() {
         setViewModel()
@@ -125,9 +125,9 @@ class SignInViewModelTest {
         verify {
             signInObserver.onChanged(true)
         }
+        clearAllMocks()
     }
 
-    @Ignore("Test is ignored as a demonstration")
     @Test
     fun `when call signIn then verify repository returns failure`() {
         setViewModel()
@@ -143,9 +143,9 @@ class SignInViewModelTest {
         verify {
             signInObserver.onChanged(true)
         }
+        clearAllMocks()
     }
 
-    @Ignore("Test is ignored as a demonstration")
     @Test
     fun `when call signIn then verify email returns invalid`() {
         setViewModel()
@@ -159,6 +159,7 @@ class SignInViewModelTest {
         verify {
             emailObserver.onChanged(true)
         }
+        clearAllMocks()
     }
 
     @Test
@@ -174,5 +175,6 @@ class SignInViewModelTest {
         verify {
             passwordObserver.onChanged(true)
         }
+        clearAllMocks()
     }
 }
