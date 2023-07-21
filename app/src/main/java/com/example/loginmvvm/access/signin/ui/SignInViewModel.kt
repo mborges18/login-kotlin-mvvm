@@ -16,31 +16,31 @@ class SignInViewModel(
     private val model: SignInModel
 ): ViewModel() {
 
-    private val _isLoading = MutableLiveData(false)
+    private val _isLoading = MutableLiveData<Boolean>()
     val isLoading = _isLoading as LiveData<Boolean>
 
-    private val _enableFields = MutableLiveData(true)
+    private val _enableFields = MutableLiveData<Boolean>()
     val enableFields = _enableFields as LiveData<Boolean>
 
-    private val _enableButton = MutableLiveData(false)
+    private val _enableButton = MutableLiveData<Boolean>()
     val enableButton = _enableButton as LiveData<Boolean>
 
-    private val _signInSuccessResponse = MutableLiveData(false)
+    private val _signInSuccessResponse = MutableLiveData<Boolean>()
     val signInSuccessResponse = _signInSuccessResponse as LiveData<Boolean>
 
-    private val _signInErrorResponse = MutableLiveData(false)
+    private val _signInErrorResponse = MutableLiveData<Boolean>()
     val signInErrorResponse = _signInErrorResponse as LiveData<Boolean>
 
-    private val _signInNotFoundResponse = MutableLiveData(false)
+    private val _signInNotFoundResponse = MutableLiveData<Boolean>()
     val signInNotFoundResponse = _signInNotFoundResponse as LiveData<Boolean>
 
-    private val _signInFailureResponse = MutableLiveData(false)
+    private val _signInFailureResponse = MutableLiveData<Boolean>()
     val signInFailureResponse = _signInFailureResponse as LiveData<Boolean>
 
-    private val _emailError = MutableLiveData(false)
+    private val _emailError = MutableLiveData<Boolean>()
     val emailError = _emailError as LiveData<Boolean>
 
-    private val _passwordError = MutableLiveData(false)
+    private val _passwordError = MutableLiveData<Boolean>()
     val passwordError = _passwordError as LiveData<Boolean>
 
     fun setEmail(email: String) {
