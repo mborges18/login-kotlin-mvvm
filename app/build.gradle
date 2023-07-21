@@ -82,7 +82,8 @@ dependencies {
     implementation "io.insert-koin:koin-android:$koin_version"
 
     //Coroutines
-    def coroutines_version= "1.6.4"
+    def coroutines_version= "1.7.1"
+    //noinspection GradleDependency
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
@@ -107,7 +108,7 @@ dependencies {
     implementation 'androidx.arch.core:core-testing:2.2.0'
 
     //Dispatchers
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1'
 
     //Fragment
     debugImplementation ('androidx.fragment:fragment-testing:1.6.0'){
