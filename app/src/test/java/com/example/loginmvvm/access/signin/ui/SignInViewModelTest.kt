@@ -69,7 +69,7 @@ class SignInViewModelTest {
         coVerify {
             repository.signIn(keepLogged = true, model = model)
         }
-        clearAllMocks()
+        ////clearAllMocks()
     }
 
     @Test
@@ -89,7 +89,7 @@ class SignInViewModelTest {
                 signInObserver.onChanged(responseSuccess.data)
             }
         }
-        clearAllMocks()
+        //clearAllMocks()
     }
 
     @Test
@@ -107,7 +107,7 @@ class SignInViewModelTest {
         verify {
             signInObserver.onChanged(true)
         }
-        clearAllMocks()
+        //clearAllMocks()
     }
 
     @Test
@@ -125,7 +125,7 @@ class SignInViewModelTest {
         verify {
             signInObserver.onChanged(true)
         }
-        clearAllMocks()
+        //clearAllMocks()
     }
 
     @Test
@@ -143,7 +143,7 @@ class SignInViewModelTest {
         verify {
             signInObserver.onChanged(true)
         }
-        clearAllMocks()
+        //clearAllMocks()
     }
 
     @Test
@@ -159,7 +159,7 @@ class SignInViewModelTest {
         verify {
             emailObserver.onChanged(true)
         }
-        clearAllMocks()
+        //clearAllMocks()
     }
 
     @Test
@@ -175,6 +175,6 @@ class SignInViewModelTest {
         verify {
             passwordObserver.onChanged(true)
         }
-        clearAllMocks()
+        //clearAllMocks()
     }
 }
