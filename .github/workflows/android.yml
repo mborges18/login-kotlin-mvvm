@@ -50,7 +50,7 @@ jobs:
       #    script: ./gradlew connectedCheck --stacktrace
 
       - name: Change wrapper permissions
-        run: chmod +x ./gradlew --stacktrace
+        run: chmod +x ./gradlew
 
       # Run Tests Build
       - name: Run gradle tests
@@ -58,20 +58,20 @@ jobs:
 
       # Run Build Project
       - name: Build gradle project
-        run: ./gradlew build --stacktrace
+        run: ./gradlew build
 
       # Create APK Debug
       - name: Build apk debug project (APK) - ${{ env.main_project_module }} module
-        run: ./gradlew assembleDebug --stacktrace
+        run: ./gradlew assembleDebug
 
       # Create APK Release
       - name: Build apk release project (APK) - ${{ env.main_project_module }} module
-        run: ./gradlew assemble --stacktrace
+        run: ./gradlew assemble
 
       # Create Bundle AAB Release
       # Noted for main module build [main_project_module]:bundleRelease
       - name: Build app bundle release (AAB) - ${{ env.main_project_module }} module
-        run: ./gradlew ${{ env.main_project_module }}:bundleRelease --stacktrace
+        run: ./gradlew ${{ env.main_project_module }}:bundleRelease
 
       # Upload Artifact Build
       # Noted For Output [main_project_module]/build/outputs/apk/debug/
