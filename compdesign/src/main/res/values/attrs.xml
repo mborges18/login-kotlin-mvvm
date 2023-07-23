@@ -1,0 +1,35 @@
+<resources>
+    <declare-styleable name="CompEditTextInput">
+        <attr name="comp_id" format="reference" />
+        <attr name="comp_counter" format="integer" />
+        <attr name="comp_endIconAction" format="enum">
+            <enum name="password_toggle" value="1"/>
+            <enum name="clear_field" value="2"/>
+        </attr>
+        <attr name="comp_mask" format="enum">
+            <enum name="none" value="-1"/>
+            <enum name="cpf" value="1"/>
+            <enum name="cnpj" value="2"/>
+            <enum name="date" value="3"/>
+            <enum name="phone" value="4"/>
+        </attr>
+        <attr name="comp_hint" format="string" />
+        <attr name="android:maxLength" format="integer" min="0" />
+        <attr name="android:drawableStart" format="reference" />
+        <attr name="android:drawableEnd" format="reference" />
+        <attr name="android:inputType" format="flags" />
+    </declare-styleable>
+    <declare-styleable name="CompButton">
+        <attr name="comp_text" format="string" />
+    </declare-styleable>
+    <declare-styleable name="CompPrimeButton">
+        <attr name="comp_prime_text" format="string" />
+        <attr name="comp_prime_icon" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="CompHeader">
+        <attr name="comp_title" format="string" />
+        <attr name="comp_subtitle" format="string" />
+        <attr name="comp_description" format="string" />
+        <attr name="comp_icon" format="integer" />
+    </declare-styleable>
+</resources>

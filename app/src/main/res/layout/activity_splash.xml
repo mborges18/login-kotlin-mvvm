@@ -6,7 +6,7 @@
     android:background="@color/colorPrimary">
 
     <TextView
-        android:id="@+id/txvTitle"
+        android:id="@+id/txv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/hermano_alto"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txvSubTitle"
+        android:id="@+id/txv_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="-20dp"
@@ -29,6 +29,6 @@
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txvTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/txv_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

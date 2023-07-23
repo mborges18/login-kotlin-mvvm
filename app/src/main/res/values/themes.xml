@@ -1,9 +1,14 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Base.Theme.LoginMvvm" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.Bridge">
         <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="Theme.LoginMvvm" parent="Base.Theme.LoginMvvm" />
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorControlNormal">@color/white</item>
+    </style>
 </resources>

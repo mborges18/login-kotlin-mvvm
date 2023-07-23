@@ -1,4 +1,4 @@
-# Células - Android
+# Kotlin - Android
 
 ---
 
@@ -9,8 +9,8 @@ Este é um projeto android estruturado em MVVM
 https://projects.zoho.com
 
 ## Requisitos
-- Kotlin 1.8.0
+- Kotlin 1.8.20
 - Koin 3.4.1
-- Gradle 7.5
-- Android Gradle Plugin (AGP) 7.4.2
-- Coroutines 3.4.1
+- Android Gradle Plugin (AGP) 8.0.2
+- Gradle 8.0
+- Coroutines 1.6.4
