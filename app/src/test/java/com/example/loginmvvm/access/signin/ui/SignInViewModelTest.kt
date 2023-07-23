@@ -5,12 +5,10 @@ import androidx.lifecycle.Observer
 import com.example.loginmvvm.access.signin.data.repository.SignInRepository
 import com.example.loginmvvm.access.signin.domain.SignInModel
 import com.example.loginmvvm.common.result.ResultState
-import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
 import io.mockk.verify
-import io.mockk.verifyOrder
 import io.mockk.verifySequence
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -49,10 +47,10 @@ class SignInViewModelTest {
     }
 
     private fun setViewModel() {
-        clearAllMocks()
         repository = mockk(relaxed = true)
         model = SignInModel()
         viewModel = SignInViewModel(repository, model)
+        setData()
     }
 
     private fun setData() {
@@ -66,7 +64,6 @@ class SignInViewModelTest {
         val result: ResultState<Boolean> = mockk(relaxed = true)
         coEvery { repository.signIn(keepLogged = true, model = model) } returns result
 
-        setData()
         viewModel.signIn(keepLogged = true)
 
         coVerify {
@@ -77,7 +74,6 @@ class SignInViewModelTest {
     @Test
     fun `when call signIn then verify repository returns success`() {
         setViewModel()
-        setData()
         val uiStateObserver: Observer<ResultState<Any>> = mockk(relaxed = true)
         viewModel.uiState.observeForever(uiStateObserver)
         val result: ResultState<Boolean> = ResultState.Success(true)
@@ -101,7 +97,6 @@ class SignInViewModelTest {
 
         coEvery { repository.signIn(keepLogged = true, model = model) } returns result
 
-        setData()
         viewModel.signIn(keepLogged = true)
 
         verifySequence {
@@ -119,10 +114,9 @@ class SignInViewModelTest {
 
         coEvery { repository.signIn(keepLogged = true, model = model) } returns result
 
-        setData()
         viewModel.signIn(keepLogged = true)
 
-        verifyOrder {
+        verifySequence {
             uiStateObserver.onChanged(ResultState.Loading)
             uiStateObserver.onChanged(result)
         }
@@ -137,7 +131,6 @@ class SignInViewModelTest {
 
         coEvery { repository.signIn(keepLogged = true, model = model) } returns result
 
-        setData()
         viewModel.signIn(keepLogged = true)
 
         verifySequence {
@@ -152,7 +145,6 @@ class SignInViewModelTest {
         val emailObserver: Observer<Boolean> = mockk(relaxed = true)
         viewModel.emailError.observeForever(emailObserver)
 
-        setData()
         viewModel.setEmail("email")
         viewModel.signIn(keepLogged = true)
 
@@ -167,7 +159,6 @@ class SignInViewModelTest {
         val passwordObserver: Observer<Boolean> = mockk(relaxed = true)
         viewModel.passwordError.observeForever(passwordObserver)
 
-        setData()
         viewModel.setPassword("126")
         viewModel.signIn(keepLogged = true)
 
