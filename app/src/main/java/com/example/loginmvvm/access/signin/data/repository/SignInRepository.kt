@@ -25,10 +25,10 @@ class SignInRepositoryImpl(
                     ResultState.Success(true)
                 }
                 NOT_FOUND -> ResultState.NotFound
-                else -> ResultState.Error(String())
+                else -> ResultState.Error
             }
         } catch (e: Throwable) {
-            ResultState.Failure(e)
+            ResultState.Failure
         }
     }
 }

@@ -110,7 +110,7 @@ class SignInViewModelTest {
         setViewModel()
         val uiStateObserver: Observer<ResultState<Any>> = mockk(relaxed = true)
         viewModel.uiState.observeForever(uiStateObserver)
-        val result: ResultState<Boolean> = ResultState.Error("message")
+        val result: ResultState<Boolean> = ResultState.Error
 
         coEvery { repository.signIn(keepLogged = true, model = model) } returns result
 
@@ -127,7 +127,7 @@ class SignInViewModelTest {
         setViewModel()
         val uiStateObserver: Observer<ResultState<Any>> = mockk(relaxed = true)
         viewModel.uiState.observeForever(uiStateObserver)
-        val result: ResultState<Boolean> = ResultState.Failure(Throwable())
+        val result: ResultState<Boolean> = ResultState.Failure
 
         coEvery { repository.signIn(keepLogged = true, model = model) } returns result
 
