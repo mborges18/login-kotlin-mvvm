@@ -111,7 +111,9 @@ dependencies {
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1'
 
     //Fragment
-    debugImplementation ('androidx.fragment:fragment-testing:1.6.0'){
+    def fragment_version = "1.6.0"
+    implementation "androidx.fragment:fragment-ktx:$fragment_version"
+    debugImplementation ("androidx.fragment:fragment-testing:$fragment_version"){
         exclude group:'androidx.test', module:'monitor'
     }
 
