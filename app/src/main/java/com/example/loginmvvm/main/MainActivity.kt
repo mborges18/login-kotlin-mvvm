@@ -1,4 +1,4 @@
-package com.example.loginmvvm
+package com.example.loginmvvm.main
 
 import android.content.Context
 import android.content.Intent

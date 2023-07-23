@@ -1,4 +1,4 @@
-package com.example.loginmvvm.access.signin.model
+package com.example.loginmvvm.access.signin.domain
 
 import com.example.loginmvvm.access.signin.data.model.SignInRequest
 

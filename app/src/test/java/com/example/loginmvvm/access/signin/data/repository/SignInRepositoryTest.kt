@@ -3,7 +3,7 @@ package com.example.loginmvvm.access.signin.data.repository
 import com.example.loginmvvm.access.signin.data.api.SignInApi
 import com.example.loginmvvm.access.signin.data.model.SignInRequest
 import com.example.loginmvvm.access.signin.data.model.SignInResponse
-import com.example.loginmvvm.access.signin.model.SignInModel
+import com.example.loginmvvm.access.signin.domain.SignInModel
 import com.example.loginmvvm.common.data.local.cache.Cache
 import com.example.loginmvvm.common.result.ResultState
 import io.mockk.coEvery

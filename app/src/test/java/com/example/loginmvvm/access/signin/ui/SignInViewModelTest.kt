@@ -3,13 +3,14 @@ package com.example.loginmvvm.access.signin.ui
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.example.loginmvvm.access.signin.data.repository.SignInRepository
-import com.example.loginmvvm.access.signin.model.SignInModel
+import com.example.loginmvvm.access.signin.domain.SignInModel
 import com.example.loginmvvm.common.result.ResultState
-import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
 import io.mockk.verify
+import io.mockk.verifyOrder
+import io.mockk.verifySequence
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -47,7 +48,6 @@ class SignInViewModelTest {
     }
 
     private fun setViewModel() {
-        clearAllMocks()
         repository = mockk(relaxed = true)
         model = SignInModel()
         viewModel = SignInViewModel(repository, model)
@@ -75,68 +75,72 @@ class SignInViewModelTest {
     @Test
     fun `when call signIn then verify repository returns success`() {
         setViewModel()
-        val signInObserver: Observer<Boolean> = mockk(relaxed = true)
-        val responseSuccess: ResultState<Boolean> = ResultState.Success(true)
-        viewModel.signInSuccessResponse.observeForever(signInObserver)
+        val uiStateObserver: Observer<ResultState<Any>> = mockk(relaxed = true)
+        viewModel.uiState.observeForever(uiStateObserver)
+        val result: ResultState<Boolean> = ResultState.Success(true)
 
-        coEvery { repository.signIn(keepLogged = true, model = model) } returns responseSuccess
+        coEvery { repository.signIn(keepLogged = true, model = model) } returns result
 
         setData()
         viewModel.signIn(keepLogged = true)
 
-        verify {
-            signInObserver.onChanged(true)
+        verifySequence {
+            uiStateObserver.onChanged(ResultState.Loading)
+            uiStateObserver.onChanged(result)
         }
     }
 
     @Test
     fun `when call signIn then verify repository returns not found`() {
         setViewModel()
-        val signInObserver: Observer<Boolean> = mockk(relaxed = true)
-        val responseNotFound: ResultState<Boolean> = ResultState.NotFound()
-        viewModel.signInNotFoundResponse.observeForever(signInObserver)
+        val uiStateObserver: Observer<ResultState<Any>> = mockk(relaxed = true)
+        viewModel.uiState.observeForever(uiStateObserver)
+        val result: ResultState<Boolean> = ResultState.NotFound
 
-        coEvery { repository.signIn(keepLogged = true, model = model) } returns responseNotFound
+        coEvery { repository.signIn(keepLogged = true, model = model) } returns result
 
         setData()
         viewModel.signIn(keepLogged = true)
 
-        verify {
-            signInObserver.onChanged(true)
+        verifySequence {
+            uiStateObserver.onChanged(ResultState.Loading)
+            uiStateObserver.onChanged(result)
         }
     }
 
     @Test
     fun `when call signIn then verify repository returns error`() {
         setViewModel()
-        val signInObserver: Observer<Boolean> = mockk(relaxed = true)
-        val responseError: ResultState<Boolean> = ResultState.Error("message")
-        viewModel.signInErrorResponse.observeForever(signInObserver)
+        val uiStateObserver: Observer<ResultState<Any>> = mockk(relaxed = true)
+        viewModel.uiState.observeForever(uiStateObserver)
+        val result: ResultState<Boolean> = ResultState.Error("message")
 
-        coEvery { repository.signIn(keepLogged = true, model = model) } returns responseError
+        coEvery { repository.signIn(keepLogged = true, model = model) } returns result
 
         setData()
         viewModel.signIn(keepLogged = true)
 
-        verify {
-            signInObserver.onChanged(true)
+        verifyOrder {
+            uiStateObserver.onChanged(ResultState.Loading)
+            uiStateObserver.onChanged(result)
         }
     }
 
     @Test
     fun `when call signIn then verify repository returns failure`() {
         setViewModel()
-        val signInObserver: Observer<Boolean> = mockk(relaxed = true)
-        val responseFailure: ResultState<Boolean> = ResultState.Failure(Throwable())
-        viewModel.signInFailureResponse.observeForever(signInObserver)
+        val uiStateObserver: Observer<ResultState<Any>> = mockk(relaxed = true)
+        viewModel.uiState.observeForever(uiStateObserver)
+        val result: ResultState<Boolean> = ResultState.Failure(Throwable())
 
-        coEvery { repository.signIn(keepLogged = true, model = model) } returns responseFailure
+        coEvery { repository.signIn(keepLogged = true, model = model) } returns result
 
         setData()
         viewModel.signIn(keepLogged = true)
 
-        verify {
-            signInObserver.onChanged(true)
+        verifySequence {
+            uiStateObserver.onChanged(ResultState.Loading)
+            uiStateObserver.onChanged(result)
         }
     }
 

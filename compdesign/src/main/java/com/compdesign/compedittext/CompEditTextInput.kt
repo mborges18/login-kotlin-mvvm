@@ -74,6 +74,11 @@ class CompEditTextInput @JvmOverloads constructor(
         binding.tvError.text = msg
     }
 
+    fun normalizeField() {
+        handlerClearError()
+        handlerColor(R.color.colorGrayLight)
+    }
+
     fun bindEnabled(it: Boolean) {
         ediText?.clearFocus()
         ediText?.isEnabled = it

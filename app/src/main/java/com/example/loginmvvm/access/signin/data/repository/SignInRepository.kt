@@ -1,9 +1,10 @@
 package com.example.loginmvvm.access.signin.data.repository
 
 import com.example.loginmvvm.access.signin.data.api.SignInApi
-import com.example.loginmvvm.access.signin.data.model.SignInResponse
-import com.example.loginmvvm.access.signin.model.SignInModel
-import com.example.loginmvvm.access.signin.model.toRequest
+import com.example.loginmvvm.access.signin.domain.SignInModel
+import com.example.loginmvvm.access.signin.domain.toRequest
+import com.example.loginmvvm.common.data.SUCCESS
+import com.example.loginmvvm.common.data.NOT_FOUND
 import com.example.loginmvvm.common.data.local.cache.Cache
 import com.example.loginmvvm.common.data.local.cache.CacheImpl.Companion.USER_ID
 import com.example.loginmvvm.common.data.local.cache.CacheImpl.Companion.USER_KEEP_LOGGED
@@ -18,12 +19,12 @@ class SignInRepositoryImpl(
         return try {
             val response = api.signIn(model.toRequest())
             when(response.code()) {
-                200 -> {
+                SUCCESS -> {
                     cache.insert(USER_KEEP_LOGGED, keepLogged.toString())
                     response.body()?.idUser?.let { cache.insert(USER_ID, it) }
                     ResultState.Success(true)
                 }
-                404 -> ResultState.NotFound()
+                NOT_FOUND -> ResultState.NotFound
                 else -> ResultState.Error(String())
             }
         } catch (e: Throwable) {
