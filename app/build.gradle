@@ -48,9 +48,6 @@ android {
 
         execution 'ANDROIDX_TEST_ORCHESTRATOR'
     }
-    lintOptions {
-        disable 'FragmentGradleConfiguration'
-    }
 }
 
 dependencies {
@@ -119,8 +116,6 @@ dependencies {
     def fragment_version = "1.6.0"
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
     debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
-    //noinspection FragmentGradleConfiguration
-    testImplementation "androidx.fragment:fragment-testing:$fragment_version"
 
     //Mockk
     testImplementation 'io.mockk:mockk:1.13.3'
