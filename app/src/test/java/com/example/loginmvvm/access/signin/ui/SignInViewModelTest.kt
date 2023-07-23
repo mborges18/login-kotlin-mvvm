@@ -77,13 +77,13 @@ class SignInViewModelTest {
     @Test
     fun `when call signIn then verify repository returns success`() {
         setViewModel()
+        setData()
         val uiStateObserver: Observer<ResultState<Any>> = mockk(relaxed = true)
         viewModel.uiState.observeForever(uiStateObserver)
         val result: ResultState<Boolean> = ResultState.Success(true)
 
         coEvery { repository.signIn(keepLogged = true, model = model) } returns result
 
-        setData()
         viewModel.signIn(keepLogged = true)
 
         verifySequence {
