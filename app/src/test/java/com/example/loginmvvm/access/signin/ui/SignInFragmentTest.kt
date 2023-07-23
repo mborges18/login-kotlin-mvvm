@@ -19,6 +19,7 @@ class SignInFragmentTest {
                 it.checkIsVisibleDescription()
                 it.checkIsVisibleInputEmail()
                 it.checkIsVisibleInputPassword()
+                it.checkIsVisibleSwitchButton()
                 it.checkIsVisibleButton()
             }
         }

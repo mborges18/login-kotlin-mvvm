@@ -3,9 +3,11 @@ package com.example.loginmvvm.access.signin.ui
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.compdesign.compbutton.CompPrimeButton
-import com.example.loginmvvm.R
+import com.example.loginmvvm.R as RL
+import com.compdesign.R as RC
 import com.compdesign.compedittext.CompEditTextInput
-import org.junit.Assert
+import com.google.android.material.switchmaterial.SwitchMaterial
+import org.junit.Assert.assertEquals
 
 class SignInFragmentRobot {
 
@@ -17,60 +19,74 @@ class SignInFragmentRobot {
     }
 
     fun checkIsVisibleTitle() {
-        Assert.assertEquals(true, fragment?.view?.findViewById<TextView>(R.id.txv_title)?.isVisible)
-        Assert.assertEquals(
+        assertEquals(true, fragment?.view?.findViewById<TextView>(RC.id.txv_title)?.isVisible)
+        assertEquals(
             "Acessar",
-            fragment?.view?.findViewById<TextView>(R.id.txv_title)?.text.toString()
+            fragment?.view?.findViewById<TextView>(RC.id.txv_title)?.text.toString()
         )
     }
 
     fun checkIsVisibleSubTitle() {
-        Assert.assertEquals(
+        assertEquals(
             true,
-            fragment?.view?.findViewById<TextView>(R.id.txv_subtitle)?.isVisible
+            fragment?.view?.findViewById<TextView>(RC.id.txv_subtitle)?.isVisible
         )
-        Assert.assertEquals(
+        assertEquals(
             "Seja bem vindo!",
-            fragment?.view?.findViewById<TextView>(R.id.txv_subtitle)?.text.toString()
+            fragment?.view?.findViewById<TextView>(RC.id.txv_subtitle)?.text.toString()
         )
     }
 
     fun checkIsVisibleDescription() {
-//        Assert.assertEquals(
-//            true,
-//            fragment?.view?.findViewById<TextView>(R.id.txv_description)?.isVisible
-//        )
-//        Assert.assertEquals(
-//            "Informe seu e-mail e senha para acessar a sua área.",
-//            fragment?.view?.findViewById<TextView>(R.id.txv_description)?.text.toString()
-//        )
+        assertEquals(
+            true,
+            fragment?.view?.findViewById<TextView>(RC.id.txv_description)?.isVisible
+        )
+        assertEquals(
+            "Informe seu e-mail e senha para acessar a sua área.",
+            fragment?.view?.findViewById<TextView>(RC.id.txv_description)?.text.toString()
+        )
     }
 
     fun checkIsVisibleInputEmail() {
-        Assert.assertEquals(
+        assertEquals(
             true,
-            fragment?.view?.findViewById<CompEditTextInput>(R.id.cdt_email)?.isVisible
+            fragment?.view?.findViewById<CompEditTextInput>(RL.id.cdt_email)?.isVisible
         )
         val placeHolder =
-            (fragment?.view?.findViewById(R.id.cdt_email) as CompEditTextInput).getPlaceHolder()
-        Assert.assertEquals("E-mail", placeHolder)
+            (fragment?.view?.findViewById(RL.id.cdt_email) as CompEditTextInput).getPlaceHolder()
+        assertEquals("E-mail", placeHolder)
     }
 
     fun checkIsVisibleInputPassword() {
-        Assert.assertEquals(
+        assertEquals(
             true,
-            fragment?.view?.findViewById<CompEditTextInput>(R.id.cdt_password)?.isVisible
+            fragment?.view?.findViewById<CompEditTextInput>(RL.id.cdt_password)?.isVisible
         )
         val placeHolder =
-            (fragment?.view?.findViewById(R.id.cdt_password) as CompEditTextInput).getPlaceHolder()
-        Assert.assertEquals("Senha", placeHolder)
+            (fragment?.view?.findViewById(RL.id.cdt_password) as CompEditTextInput).getPlaceHolder()
+        assertEquals("Senha", placeHolder)
+    }
+
+    fun checkIsVisibleSwitchButton() {
+        assertEquals(
+            true,
+            fragment?.view?.findViewById<TextView>(RL.id.txv_keep_logged)?.isVisible
+        )
+
+        assertEquals(
+            "continuar conectado",
+            fragment?.view?.findViewById<TextView>(RL.id.txv_keep_logged)?.text.toString()
+        )
+
+        assertEquals(true, fragment?.view?.findViewById<SwitchMaterial>(RL.id.swt_keep_logged)?.isVisible)
     }
 
     fun checkIsVisibleButton() {
-        Assert.assertEquals(true, fragment?.view?.findViewById<CompPrimeButton>(R.id.btn_signin)?.isVisible)
-//        Assert.assertEquals(
-//            "Entrar",
-//            fragment?.view?.findViewById<TextView>(R.id.cpb_title)?.text.toString()
-//        )
+        assertEquals(true, fragment?.view?.findViewById<CompPrimeButton>(RL.id.btn_signin)?.isVisible)
+        assertEquals(
+            "Entrar",
+            fragment?.view?.findViewById<TextView>(RC.id.cpb_title)?.text.toString()
+        )
     }
 }
