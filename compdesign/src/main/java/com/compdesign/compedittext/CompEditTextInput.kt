@@ -84,6 +84,13 @@ class CompEditTextInput @JvmOverloads constructor(
     fun normalizeField() {
         handlerClearError()
         handlerColor(R.color.colorGrayLight)
+        if (ediText?.text.toString().isEmpty()) {
+            binding.tvHolder.animate().translationY(VALUE_0)
+                .translationX(VALUE_0).duration = DURATION
+        } else {
+            binding.tvHolder.animate().translationY(-VALUE_70)
+                .translationX(-VALUE_70).duration = DURATION
+        }
     }
 
     fun bindEnabled(it: Boolean) {

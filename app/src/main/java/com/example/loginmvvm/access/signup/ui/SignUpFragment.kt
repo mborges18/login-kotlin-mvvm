@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.loginmvvm.main.MainActivity
 import com.example.loginmvvm.R
 import com.example.loginmvvm.access.AccessActivity
 import com.example.loginmvvm.access.signup.domain.SignUpModel
@@ -47,10 +46,12 @@ class SignUpFragment: Fragment() {
         binding.cdtEmail.setListener {
             viewModel.setEmail(it)
         }
+        viewModel.setTypeMember(TypeMemberEnum.GOLD.nameMember)
         binding.cmpRadio.setData(
             arrayListOf(
-                Pair(TypeMemberEnum.DISCIPLE.nameMember, true),
-                Pair(TypeMemberEnum.LEADER.nameMember, false)
+                Pair(TypeMemberEnum.GOLD.nameMember, true),
+                Pair(TypeMemberEnum.SILVER.nameMember, false),
+                Pair(TypeMemberEnum.BRONZE.nameMember, false)
             )
         ) {
             viewModel.setTypeMember(it)
@@ -78,26 +79,27 @@ class SignUpFragment: Fragment() {
             }
         }
 
+        observerErrorName()
+        observerErrorBirthDate()
+        observerErrorPhone()
         observerErrorEmail()
         observerErrorPassword()
+        observerErrorConfirmPassword()
+        observerErrorDifferentPassword()
         observerEnableButton()
     }
 
     private fun handlerShowLoading() = with(binding) {
         btnSignup.showLoading()
         cdtName.bindEnabled(false)
-        cdtName.normalizeField()
         cdtBirthDate.bindEnabled(false)
-        cdtBirthDate.normalizeField()
         cdtPhone.bindEnabled(false)
-        cdtPhone.normalizeField()
         cdtEmail.bindEnabled(false)
-        cdtEmail.normalizeField()
         cmpRadio.bindEnabled(false)
         cdtPassword.bindEnabled(false)
-        cdtPassword.normalizeField()
         cdtConfirmPassword.bindEnabled(false)
-        cdtConfirmPassword.normalizeField()
+        normalizeFields()
+
     }
 
     private fun handlerHideLoading() = with(binding) {
@@ -111,7 +113,28 @@ class SignUpFragment: Fragment() {
         cdtConfirmPassword.bindEnabled(true)
     }
 
+    private fun normalizeFields() = with(binding) {
+        cdtName.normalizeField()
+        cdtBirthDate.normalizeField()
+        cdtPhone.normalizeField()
+        cdtEmail.normalizeField()
+        cdtPassword.normalizeField()
+        cdtConfirmPassword.normalizeField()
+    }
+
+    private fun handlerClearFields() = with(binding) {
+        cdtName.clearField()
+        cdtBirthDate.clearField()
+        cdtPhone.clearField()
+        cdtEmail.clearField()
+        cdtPassword.clearField()
+        cdtConfirmPassword.clearField()
+        normalizeFields()
+    }
+
     private fun handlerDataSuccess(model: SignUpModel) {
+        handlerHideLoading()
+        handlerClearFields()
         (activity as? AccessActivity)?.apply {
             email = model.email
             password = model.password
@@ -122,8 +145,11 @@ class SignUpFragment: Fragment() {
 
     private fun handlerDataExists() = with(binding) {
         handlerHideLoading()
-        cdtEmail.setError(getString(R.string.msg_error_user_not_found))
-        cdtPassword.setError(getString(R.string.msg_error_user_not_found))
+        Message().dialog(
+            requireContext(),
+            Message.EType.ERROR,
+            getString(R.string.msg_error_user_exists)
+        )
     }
 
     private fun handlerMessageError() {
@@ -134,6 +160,7 @@ class SignUpFragment: Fragment() {
             getString(R.string.msg_error_generic)
         )
     }
+
     private fun handlerMessageFailure() {
         handlerHideLoading()
         Message().dialog(
@@ -141,6 +168,30 @@ class SignUpFragment: Fragment() {
             Message.EType.CONNECTION,
             getString(R.string.msg_error_network)
         )
+    }
+
+    private fun observerErrorName() {
+        viewModel.nameError.observe(viewLifecycleOwner) {
+            if(it) {
+                binding.cdtName.setError(getString(R.string.msg_invalid_field))
+            }
+        }
+    }
+
+    private fun observerErrorBirthDate() {
+        viewModel.birthDateError.observe(viewLifecycleOwner) {
+            if(it) {
+                binding.cdtBirthDate.setError(getString(R.string.msg_invalid_field))
+            }
+        }
+    }
+
+    private fun observerErrorPhone() {
+        viewModel.phoneError.observe(viewLifecycleOwner) {
+            if(it) {
+                binding.cdtPhone.setError(getString(R.string.msg_invalid_field))
+            }
+        }
     }
 
     private fun observerErrorEmail() {
@@ -154,7 +205,24 @@ class SignUpFragment: Fragment() {
     private fun observerErrorPassword() {
         viewModel.passwordError.observe(viewLifecycleOwner) {
             if(it) {
-                binding.cdtPassword.setError(getString(R.string.msg_invalid_field))
+                binding.cdtPassword.setError(getString(R.string.msg_invalid_password))
+            }
+        }
+    }
+
+    private fun observerErrorConfirmPassword() {
+        viewModel.confirmPasswordError.observe(viewLifecycleOwner) {
+            if(it) {
+                binding.cdtConfirmPassword.setError(getString(R.string.msg_invalid_password))
+            }
+        }
+    }
+
+    private fun observerErrorDifferentPassword() {
+        viewModel.differentPasswords.observe(viewLifecycleOwner) {
+            if(it) {
+                binding.cdtPassword.setError(getString(R.string.msg_different_password))
+                binding.cdtConfirmPassword.setError(getString(R.string.msg_different_password))
             }
         }
     }

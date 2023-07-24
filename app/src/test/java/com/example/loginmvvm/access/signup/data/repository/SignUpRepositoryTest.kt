@@ -34,7 +34,7 @@ class SignUpRepositoryTest {
             birthDate = "18/11/1981",
             email = "email@test.com",
             phone = "(81) 986201589",
-            typeMember = TypeMemberEnum.LEADER,
+            typeMember = TypeMemberEnum.GOLD,
             status = TypeStatusEnum.ACTIVE,
             password = "A@123456",
             confirmPassword = "A@123456"
@@ -50,7 +50,7 @@ class SignUpRepositoryTest {
             phone = "81986201853",
             birthDate = "1981-11-18",
             email = "email@test.com",
-            typeMember = TypeMemberEnum.LEADER,
+            typeMember = TypeMemberEnum.GOLD,
             status = TypeStatusEnum.ACTIVE
         )
     }

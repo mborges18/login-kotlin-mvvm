@@ -11,7 +11,7 @@ data class SignUpModel(
     var birthDate: String = "",
     var email: String = "",
     var phone: String = "",
-    var typeMember: TypeMemberEnum = TypeMemberEnum.DISCIPLE,
+    var typeMember: TypeMemberEnum = TypeMemberEnum.BRONZE,
     var status: TypeStatusEnum = TypeStatusEnum.ACTIVE,
     var password: String = "",
     var confirmPassword: String = "",

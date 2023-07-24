@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.loginmvvm.access.signin.data.repository.SignInRepository
-import com.example.loginmvvm.access.signin.domain.SignInModel
 import com.example.loginmvvm.access.signup.data.repository.SignUpRepository
 import com.example.loginmvvm.access.signup.domain.SignUpModel
 import com.example.loginmvvm.access.signup.domain.TypeMemberEnum
@@ -49,9 +47,6 @@ class SignUpViewModel(
     private val _differentPasswords = MutableLiveData(false)
     val differentPasswords = _differentPasswords as LiveData<Boolean>
 
-    private val _passwordsInfo = MutableLiveData(false)
-    val passwordsInfo = _passwordsInfo as LiveData<Boolean>
-
     fun setName(name: String) {
         model.apply {
             this.name = name
@@ -81,18 +76,26 @@ class SignUpViewModel(
     }
 
     fun setTypeMember(typeMember: String) {
-        when (typeMember) {
-            TypeMemberEnum.LEADER.nameMember -> {
-                this.model.apply {
-                    this.typeMember = TypeMemberEnum.LEADER
-                }
-            }
-            TypeMemberEnum.DISCIPLE.nameMember -> {
-                this.model.apply {
-                    this.typeMember = TypeMemberEnum.DISCIPLE
-                }
-            }
+        this.model.apply {
+            this.typeMember = TypeMemberEnum.from(typeMember)
         }
+//        when (typeMember) {
+//            TypeMemberEnum.GOLD.nameMember -> {
+//                this.model.apply {
+//                    this.typeMember = TypeMemberEnum.GOLD
+//                }
+//            }
+//            TypeMemberEnum.SILVER.nameMember -> {
+//                this.model.apply {
+//                    this.typeMember = TypeMemberEnum.SILVER
+//                }
+//            }
+//            TypeMemberEnum.BRONZE.nameMember -> {
+//                this.model.apply {
+//                    this.typeMember = TypeMemberEnum.BRONZE
+//                }
+//            }
+//        }
     }
 
     fun setPassword(password: String) {
@@ -154,11 +157,6 @@ class SignUpViewModel(
         if (model.confirmPassword.isPasswordValid().not()) {
             isError = true
             _confirmPasswordError.value = true
-        }
-
-        if (model.password.isPasswordValid().not() || model.confirmPassword.isPasswordValid().not()) {
-            isError = true
-            _passwordsInfo.value = true
         }
 
         if (

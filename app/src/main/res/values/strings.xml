@@ -23,9 +23,12 @@
     <string name="act_ok">OK</string>
 
     <string name="msg_invalid_field">Campo inválido</string>
+    <string name="msg_different_password">As senhas devem ser iguais</string>
+    <string name="msg_invalid_password">A senha deve ter de 6 a 12 caracteres</string>
     <string name="msg_error_generic">Ops! Ocorreu um erro inesperado, tente novamente mais tarde, por favor!</string>
     <string name="msg_error_network">Ops! Ocorreu um erro na rede, por favor, verifique sua conexão!</string>
     <string name="msg_error_user_not_found">Usuário ou senha inválido</string>
+    <string name="msg_error_user_exists">E-mail já registrado. Informe outro e-mail, por favor!</string>
 
     <string name="digits_texts">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZÁáÂâÃãÀàÇçÉéÊêÍíÓóÔôÕõÚú.</string>
 </resources>
