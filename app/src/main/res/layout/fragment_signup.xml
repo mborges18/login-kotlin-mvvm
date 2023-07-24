@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             app:comp_title="@string/title_signup"
             app:comp_subtitle="@string/txt_saudation"
-            app:comp_description="@string/txt_info_saudation"
+            app:comp_description="@string/txt_info_signin"
             app:comp_icon="@drawable/ic_new_create" />
 
             <com.compdesign.compedittext.CompEditTextInput

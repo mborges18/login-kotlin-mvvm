@@ -15,7 +15,8 @@
 
     <string name="txt_keep_logged">continuar conectado</string>
     <string name="txt_saudation">Seja bem vindo!</string>
-    <string name="txt_info_saudation">Informe seu e-mail e senha para acessar a sua área.</string>
+    <string name="txt_info_signin">Informe seu e-mail e senha para acessar à sua área.</string>
+    <string name="txt_info_signup">Informe seus dados para se cadastrar.</string>
 
     <string name="act_enter">Entrar</string>
     <string name="act_register">Cadastrar</string>

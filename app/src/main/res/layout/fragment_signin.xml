@@ -23,9 +23,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:comp_title="@string/title_signin"
-            app:comp_icon="@drawable/ic_new_create"
+            app:comp_icon="@drawable/ic_new_unlock"
             app:comp_subtitle="@string/txt_saudation"
-            app:comp_description="@string/txt_info_saudation" />
+            app:comp_description="@string/txt_info_signin" />
 
         <com.compdesign.compedittext.CompEditTextInput
             android:id="@+id/cdt_email"
