@@ -2,11 +2,9 @@ package com.example.loginmvvm.access.signup.ui
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.example.loginmvvm.access.signup.data.model.SignUpResponse
 import com.example.loginmvvm.access.signup.data.repository.SignUpRepository
 import com.example.loginmvvm.access.signup.domain.SignUpModel
 import com.example.loginmvvm.common.result.ResultState
-import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -37,7 +35,6 @@ class SignUpViewModelTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Before
     fun setUp() {
-        clearAllMocks()
         Dispatchers.setMain(mainThreadSurrogate)
     }
 
