@@ -4,19 +4,27 @@
 
     <string name="title_signin">Acessar</string>
     <string name="title_signup">Cadastrar</string>
+    <string name="title_select_an_option">Selecione uma opção:</string>
 
     <string name="hint_email">E-mail</string>
     <string name="hint_password">Senha</string>
+    <string name="hint_confirm_password">Confirme a senha</string>
+    <string name="hint_name">Nome</string>
+    <string name="hint_phone">Telefone celular</string>
+    <string name="hint_birthday">Data de nascimento</string>
 
     <string name="txt_keep_logged">continuar conectado</string>
     <string name="txt_saudation">Seja bem vindo!</string>
     <string name="txt_info_saudation">Informe seu e-mail e senha para acessar a sua área.</string>
 
     <string name="act_enter">Entrar</string>
+    <string name="act_register">Cadastrar</string>
+    <string name="act_ok">OK</string>
 
     <string name="msg_invalid_field">Campo inválido</string>
     <string name="msg_error_generic">Ops! Ocorreu um erro inesperado, tente novamente mais tarde, por favor!</string>
     <string name="msg_error_network">Ops! Ocorreu um erro na rede, por favor, verifique sua conexão!</string>
     <string name="msg_error_user_not_found">Usuário ou senha inválido</string>
-    <string name="act_ok">OK</string>
+
+    <string name="digits_texts">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZÁáÂâÃãÀàÇçÉéÊêÍíÓóÔôÕõÚú.</string>
 </resources>

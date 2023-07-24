@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/form_sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:paddingHorizontal="@dimen/space_16dp"
+        android:paddingVertical="@dimen/space_16dp">
+
+        <com.compdesign.compheader.CompHeader
+            android:id="@+id/ch_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:comp_title="@string/title_signup"
+            app:comp_subtitle="@string/txt_saudation"
+            app:comp_description="@string/txt_info_saudation"
+            app:comp_icon="@drawable/ic_new_create" />
+
+            <com.compdesign.compedittext.CompEditTextInput
+                android:id="@+id/cdt_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_16dp"
+                android:drawableStart="@drawable/ic_new_username"
+                android:inputType="textPersonName|textCapWords"
+                android:maxLength="30"
+                app:comp_id="@+id/edt_name"
+                app:comp_hint="@string/hint_name"
+                app:comp_mask="none" />
+
+            <com.compdesign.compedittext.CompEditTextInput
+                android:id="@+id/cdt_birth_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_16dp"
+                android:drawableStart="@drawable/ic_new_calendar_date"
+                android:inputType="number"
+                app:comp_id="@+id/edt_birthdate"
+                app:comp_hint="@string/hint_birthday"
+                app:comp_mask="date" />
+
+            <com.compdesign.compedittext.CompEditTextInput
+                android:id="@+id/cdt_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_16dp"
+                android:drawableStart="@drawable/ic_new_cell_phone"
+                android:inputType="number"
+                app:comp_id="@+id/edt_phone"
+                app:comp_hint="@string/hint_phone"
+                app:comp_mask="phone"
+                android:maxLength="15" />
+
+            <com.compdesign.compedittext.CompEditTextInput
+                android:id="@+id/cdt_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_16dp"
+                android:digits="@string/digits_texts"
+                android:drawableStart="@drawable/ic_new_email"
+                android:inputType="textEmailAddress"
+                android:maxLength="30"
+                app:comp_id="@+id/edt_email"
+                app:comp_hint="@string/hint_email"
+                app:comp_mask="none" />
+
+            <TextView
+                android:id="@+id/tv_title_radio"
+                style="@style/TitleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_16dp"
+                android:text="@string/title_select_an_option" />
+
+            <com.compdesign.compradiobutton.CompRadioButton
+                android:id="@+id/cmp_radio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_16dp"
+                app:radio_names="@array/type_members" />
+
+            <com.compdesign.compedittext.CompEditTextInput
+                android:id="@+id/cdt_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_16dp"
+                android:drawableStart="@drawable/ic_new_keys"
+                android:inputType="textPassword"
+                android:maxLength="12"
+                app:comp_id="@+id/edt_password"
+                app:comp_endIconAction="password_toggle"
+                app:comp_hint="@string/hint_password"
+                app:comp_mask="none" />
+
+            <com.compdesign.compedittext.CompEditTextInput
+                android:id="@+id/cdt_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_16dp"
+                android:drawableStart="@drawable/ic_new_keys"
+                android:inputType="textPassword"
+                android:maxLength="12"
+                app:comp_id="@+id/edt_confirm_password"
+                app:comp_endIconAction="password_toggle"
+                app:comp_hint="@string/hint_confirm_password"
+                app:comp_mask="none" />
+
+            <com.compdesign.compbutton.CompPrimeButton
+                android:id="@+id/btn_signup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:comp_prime_icon="@drawable/ic_new_edit"
+                app:comp_prime_text="@string/act_register"
+                android:layout_marginTop="@dimen/space_16dp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+</ScrollView>

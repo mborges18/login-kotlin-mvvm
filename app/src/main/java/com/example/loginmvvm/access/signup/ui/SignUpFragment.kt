@@ -1,4 +1,4 @@
-package com.example.loginmvvm.access.signin.ui
+package com.example.loginmvvm.access.signup.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,45 +8,61 @@ import androidx.fragment.app.Fragment
 import com.example.loginmvvm.main.MainActivity
 import com.example.loginmvvm.R
 import com.example.loginmvvm.access.AccessActivity
+import com.example.loginmvvm.access.signup.domain.SignUpModel
+import com.example.loginmvvm.access.signup.domain.TypeMemberEnum
 import com.example.loginmvvm.common.message.Message
 import com.example.loginmvvm.common.result.ResultState
-import com.example.loginmvvm.databinding.FragmentSigninBinding
+import com.example.loginmvvm.databinding.FragmentSignupBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SignInFragment: Fragment() {
-    private val viewModel by viewModel<SignInViewModel>()
-    private var _binding: FragmentSigninBinding? = null
+class SignUpFragment: Fragment() {
+    private val viewModel by viewModel<SignUpViewModel>()
+    private var _binding: FragmentSignupBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSigninBinding.inflate(inflater, container, false)
+        _binding = FragmentSignupBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        handlerDataSignIn()
+        handlerDataSignUp()
         handlerUiStateObservers()
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.fillFieldsAfterSignUp()
-    }
-
-    private fun handlerDataSignIn() {
-        binding.cdtEmail.setListener{
+    private fun handlerDataSignUp() {
+        binding.cdtName.setListener {
+            viewModel.setName(it)
+        }
+        binding.cdtBirthDate.setListener {
+            viewModel.setBirthDate(it)
+        }
+        binding.cdtPhone.setListener {
+            viewModel.setPhone(it)
+        }
+        binding.cdtEmail.setListener {
             viewModel.setEmail(it)
+        }
+        binding.cmpRadio.setData(
+            arrayListOf(
+                Pair(TypeMemberEnum.DISCIPLE.nameMember, true),
+                Pair(TypeMemberEnum.LEADER.nameMember, false)
+            )
+        ) {
+            viewModel.setTypeMember(it)
         }
         binding.cdtPassword.setListener {
             viewModel.setPassword(it)
         }
-        binding.btnSignin.setClickListener {
-            val keepLogged = binding.swtKeepLogged.isChecked
-            viewModel.signIn(keepLogged)
+        binding.cdtConfirmPassword.setListener {
+            viewModel.setConfirmPassword(it)
+        }
+        binding.btnSignup.setClickListener {
+            viewModel.signUp()
         }
     }
 
@@ -56,38 +72,55 @@ class SignInFragment: Fragment() {
                 is ResultState.Loading -> handlerShowLoading()
                 is ResultState.Error -> handlerMessageError()
                 is ResultState.Failure -> handlerMessageFailure()
-                is ResultState.NotFound -> handlerDataNotFound()
-                is ResultState.Success -> handlerDataSuccess()
-                is ResultState.Exists -> Unit
+                is ResultState.NotFound -> Unit
+                is ResultState.Success -> handlerDataSuccess(it.data as SignUpModel)
+                is ResultState.Exists -> handlerDataExists()
             }
         }
 
-        observerFillFieldsAfterSignUp()
         observerErrorEmail()
         observerErrorPassword()
         observerEnableButton()
     }
 
     private fun handlerShowLoading() = with(binding) {
-        btnSignin.showLoading()
+        btnSignup.showLoading()
+        cdtName.bindEnabled(false)
+        cdtName.normalizeField()
+        cdtBirthDate.bindEnabled(false)
+        cdtBirthDate.normalizeField()
+        cdtPhone.bindEnabled(false)
+        cdtPhone.normalizeField()
         cdtEmail.bindEnabled(false)
         cdtEmail.normalizeField()
+        cmpRadio.bindEnabled(false)
         cdtPassword.bindEnabled(false)
         cdtPassword.normalizeField()
+        cdtConfirmPassword.bindEnabled(false)
+        cdtConfirmPassword.normalizeField()
     }
 
     private fun handlerHideLoading() = with(binding) {
-        btnSignin.hideLoading()
+        btnSignup.hideLoading()
+        cdtName.bindEnabled(true)
+        cdtBirthDate.bindEnabled(true)
+        cdtPhone.bindEnabled(true)
         cdtEmail.bindEnabled(true)
+        cmpRadio.bindEnabled(true)
         cdtPassword.bindEnabled(true)
+        cdtConfirmPassword.bindEnabled(true)
     }
 
-    private fun handlerDataSuccess() {
-        startActivity(MainActivity.newIntent(requireContext()))
-        activity?.finish()
+    private fun handlerDataSuccess(model: SignUpModel) {
+        (activity as? AccessActivity)?.apply {
+            email = model.email
+            password = model.password
+        }?.also {
+            it.gotoSignIn()
+        }
     }
 
-    private fun handlerDataNotFound() = with(binding) {
+    private fun handlerDataExists() = with(binding) {
         handlerHideLoading()
         cdtEmail.setError(getString(R.string.msg_error_user_not_found))
         cdtPassword.setError(getString(R.string.msg_error_user_not_found))
@@ -110,19 +143,6 @@ class SignInFragment: Fragment() {
         )
     }
 
-    private fun observerFillFieldsAfterSignUp() {
-        viewModel.fillFieldsAfterSignUp.observe(viewLifecycleOwner) {
-            if (it) {
-                val email  = (activity as AccessActivity).email
-                val password = (activity as AccessActivity).password
-                if (email.isNotEmpty() && password.isNotEmpty()) {
-                    binding.cdtEmail.setData(email)
-                    binding.cdtPassword.setData(password)
-                }
-            }
-        }
-    }
-
     private fun observerErrorEmail() {
         viewModel.emailError.observe(viewLifecycleOwner) {
             if(it) {
@@ -141,7 +161,7 @@ class SignInFragment: Fragment() {
 
     private fun observerEnableButton() {
         viewModel.enableButton.observe(viewLifecycleOwner) {
-            binding.btnSignin.bindEnabled(it)
+            binding.btnSignup.bindEnabled(it)
         }
     }
 
@@ -151,8 +171,8 @@ class SignInFragment: Fragment() {
     }
 
     companion object {
-        fun newInstance(): SignInFragment {
-            return SignInFragment()
+        fun newInstance(): SignUpFragment {
+            return SignUpFragment()
         }
     }
 }

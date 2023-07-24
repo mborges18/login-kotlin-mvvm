@@ -23,6 +23,7 @@ class SplashActivity: AppCompatActivity() {
     private fun handlerScreens() {
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(AccessActivity.newIntent(this))
+            finish()
         }, TIMER)
     }
 

@@ -19,6 +19,9 @@ class SignInViewModel(
     private val _uiState = MutableLiveData<ResultState<Any>>()
     val uiState = _uiState as LiveData<ResultState<Any>>
 
+    private val _fillFieldsAfterSignUp = MutableLiveData(false)
+    val fillFieldsAfterSignUp = _fillFieldsAfterSignUp as LiveData<Boolean>
+
     private val _enableButton = MutableLiveData(false)
     val enableButton = _enableButton as LiveData<Boolean>
 
@@ -65,5 +68,11 @@ class SignInViewModel(
 
     private fun handlerEnabledButton(loginModel: SignInModel) {
         _enableButton.postValue(loginModel.email.isNotEmpty() && loginModel.password.isNotEmpty())
+    }
+
+    fun fillFieldsAfterSignUp() {
+        if (model.email.isEmpty() && model.password.isEmpty()) {
+            _fillFieldsAfterSignUp.postValue(true)
+        }
     }
 }

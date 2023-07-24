@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -21,11 +22,11 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "BASE_API_URL", '"https://api-souls-and-cells-792613245.development.catalystserverless.com/server/"'
+            buildConfigField "String", "BASE_API_URL", '"https://api-credit-card-792613245.development.catalystserverless.com/server/"'
         }
         debug {
             minifyEnabled false
-            buildConfigField "String", "BASE_API_URL", '"https://api-souls-and-cells-792613245.development.catalystserverless.com/server/"'
+            buildConfigField "String", "BASE_API_URL", '"https://api-credit-card-792613245.development.catalystserverless.com/server/"'
         }
     }
     compileOptions {
