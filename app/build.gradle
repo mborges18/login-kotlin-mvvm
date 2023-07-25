@@ -41,12 +41,13 @@ android {
         buildConfig = true
     }
     testOptions {
+        unitTests.returnDefaultValues = true
         unitTests {
             includeAndroidResources = true
         }
-
         execution 'ANDROIDX_TEST_ORCHESTRATOR'
     }
+
 }
 
 dependencies {

@@ -16,6 +16,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newSingleThreadContext
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.TestCoroutineScheduler
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
@@ -68,7 +70,7 @@ class SignInViewModelTest {
         coEvery { repository.signIn(keepLogged = true, model = model) } returns result
 
         viewModel.signIn(keepLogged = true)
-        launch { delay(1000) }
+        delay(2000)
         coVerify {
             repository.signIn(keepLogged = true, model = model)
         }
@@ -84,7 +86,7 @@ class SignInViewModelTest {
         coEvery { repository.signIn(keepLogged = true, model = model) } returns result
 
         viewModel.signIn(keepLogged = true)
-        launch { delay(1000) }
+        delay(2000)
         verifySequence {
             uiStateObserver.onChanged(ResultState.Loading)
             uiStateObserver.onChanged(result)
@@ -101,7 +103,7 @@ class SignInViewModelTest {
         coEvery { repository.signIn(keepLogged = true, model = model) } returns result
 
         viewModel.signIn(keepLogged = true)
-        launch { delay(1000) }
+        delay(2000)
         verifySequence {
             uiStateObserver.onChanged(ResultState.Loading)
             uiStateObserver.onChanged(result)
@@ -118,7 +120,7 @@ class SignInViewModelTest {
         coEvery { repository.signIn(keepLogged = true, model = model) } returns result
 
         viewModel.signIn(keepLogged = true)
-        launch { delay(1000) }
+        delay(2000)
         verifySequence {
             uiStateObserver.onChanged(ResultState.Loading)
             uiStateObserver.onChanged(result)
@@ -135,7 +137,7 @@ class SignInViewModelTest {
         coEvery { repository.signIn(keepLogged = true, model = model) } returns result
 
         viewModel.signIn(keepLogged = true)
-        launch { delay(1000) }
+        delay(2000)
         verifySequence {
             uiStateObserver.onChanged(ResultState.Loading)
             uiStateObserver.onChanged(result)
@@ -150,7 +152,7 @@ class SignInViewModelTest {
 
         viewModel.setEmail("email")
         viewModel.signIn(keepLogged = true)
-        launch { delay(1000) }
+        delay(2000)
         verify {
             emailObserver.onChanged(true)
         }
@@ -164,7 +166,7 @@ class SignInViewModelTest {
 
         viewModel.setPassword("126")
         viewModel.signIn(keepLogged = true)
-        launch { delay(1000) }
+        delay(2000)
         verify {
             passwordObserver.onChanged(true)
         }

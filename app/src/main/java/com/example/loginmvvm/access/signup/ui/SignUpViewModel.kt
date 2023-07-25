@@ -79,23 +79,6 @@ class SignUpViewModel(
         this.model.apply {
             this.typeMember = TypeMemberEnum.from(typeMember)
         }
-//        when (typeMember) {
-//            TypeMemberEnum.GOLD.nameMember -> {
-//                this.model.apply {
-//                    this.typeMember = TypeMemberEnum.GOLD
-//                }
-//            }
-//            TypeMemberEnum.SILVER.nameMember -> {
-//                this.model.apply {
-//                    this.typeMember = TypeMemberEnum.SILVER
-//                }
-//            }
-//            TypeMemberEnum.BRONZE.nameMember -> {
-//                this.model.apply {
-//                    this.typeMember = TypeMemberEnum.BRONZE
-//                }
-//            }
-//        }
     }
 
     fun setPassword(password: String) {
