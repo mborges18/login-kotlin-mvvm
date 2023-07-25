@@ -68,9 +68,8 @@ class SignInViewModelTest {
         coEvery { repository.signIn(keepLogged = true, model = model) } returns result
 
         viewModel.signIn(keepLogged = true)
-
+        launch { delay(1000) }
         coVerify {
-            launch { delay(1000) }
             repository.signIn(keepLogged = true, model = model)
         }
     }
@@ -85,10 +84,9 @@ class SignInViewModelTest {
         coEvery { repository.signIn(keepLogged = true, model = model) } returns result
 
         viewModel.signIn(keepLogged = true)
-
+        launch { delay(1000) }
         verifySequence {
             uiStateObserver.onChanged(ResultState.Loading)
-            launch { delay(1000) }
             uiStateObserver.onChanged(result)
         }
     }
@@ -103,10 +101,9 @@ class SignInViewModelTest {
         coEvery { repository.signIn(keepLogged = true, model = model) } returns result
 
         viewModel.signIn(keepLogged = true)
-
+        launch { delay(1000) }
         verifySequence {
             uiStateObserver.onChanged(ResultState.Loading)
-            launch { delay(1000) }
             uiStateObserver.onChanged(result)
         }
     }
@@ -121,10 +118,9 @@ class SignInViewModelTest {
         coEvery { repository.signIn(keepLogged = true, model = model) } returns result
 
         viewModel.signIn(keepLogged = true)
-
+        launch { delay(1000) }
         verifySequence {
             uiStateObserver.onChanged(ResultState.Loading)
-            launch { delay(1000) }
             uiStateObserver.onChanged(result)
         }
     }
@@ -139,10 +135,9 @@ class SignInViewModelTest {
         coEvery { repository.signIn(keepLogged = true, model = model) } returns result
 
         viewModel.signIn(keepLogged = true)
-
+        launch { delay(1000) }
         verifySequence {
             uiStateObserver.onChanged(ResultState.Loading)
-            launch { delay(1000) }
             uiStateObserver.onChanged(result)
         }
     }
@@ -155,9 +150,8 @@ class SignInViewModelTest {
 
         viewModel.setEmail("email")
         viewModel.signIn(keepLogged = true)
-
+        launch { delay(1000) }
         verify {
-            launch { delay(1000) }
             emailObserver.onChanged(true)
         }
     }
@@ -170,9 +164,8 @@ class SignInViewModelTest {
 
         viewModel.setPassword("126")
         viewModel.signIn(keepLogged = true)
-
+        launch { delay(1000) }
         verify {
-            launch { delay(1000) }
             passwordObserver.onChanged(true)
         }
     }

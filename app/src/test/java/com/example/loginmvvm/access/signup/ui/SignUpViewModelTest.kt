@@ -73,9 +73,8 @@ class SignUpViewModelTest {
         coEvery { repository.signUp(model = model) } returns result
 
         viewModel.signUp()
-
+        launch { delay(1000) }
         coVerify {
-            launch { delay(1000) }
             repository.signUp(model = model)
         }
     }
@@ -89,10 +88,9 @@ class SignUpViewModelTest {
 
         coEvery { repository.signUp(model = model) } returns result
         viewModel.signUp()
-
+        launch { delay(1000) }
         verifySequence {
             uiStateObserver.onChanged(ResultState.Loading)
-            launch { delay(1000) }
             uiStateObserver.onChanged(result)
         }
     }
@@ -106,10 +104,9 @@ class SignUpViewModelTest {
 
         coEvery { repository.signUp(model = model) } returns result
         viewModel.signUp()
-
+        launch { delay(1000) }
         verifySequence {
             uiStateObserver.onChanged(ResultState.Loading)
-            launch { delay(1000) }
             uiStateObserver.onChanged(result)
         }
     }
@@ -123,10 +120,9 @@ class SignUpViewModelTest {
 
         coEvery { repository.signUp(model = model) } returns result
         viewModel.signUp()
-
+        launch { delay(1000) }
         verifySequence {
             uiStateObserver.onChanged(ResultState.Loading)
-            launch { delay(1000) }
             uiStateObserver.onChanged(result)
         }
     }
@@ -140,10 +136,9 @@ class SignUpViewModelTest {
 
         coEvery { repository.signUp(model = model) } returns result
         viewModel.signUp()
-
+        launch { delay(1000) }
         verifySequence {
             uiStateObserver.onChanged(ResultState.Loading)
-            launch { delay(1000) }
             uiStateObserver.onChanged(result)
         }
     }
@@ -156,9 +151,8 @@ class SignUpViewModelTest {
 
         viewModel.setName("Marcio")
         viewModel.signUp()
-
+        launch { delay(1000) }
         verify {
-            launch { delay(1000) }
             errorNameObserver.onChanged(true)
         }
     }
@@ -171,9 +165,8 @@ class SignUpViewModelTest {
 
         viewModel.setBirthDate("18/11/198")
         viewModel.signUp()
-
+        launch { delay(1000) }
         verify {
-            launch { delay(1000) }
             errorBirthdateObserver.onChanged(true)
         }
     }
@@ -186,9 +179,8 @@ class SignUpViewModelTest {
 
         viewModel.setPhone("(81) 98620-185")
         viewModel.signUp()
-
+        launch { delay(1000) }
         verify {
-            launch { delay(1000) }
             errorPhoneObserver.onChanged(true)
         }
     }
@@ -201,9 +193,8 @@ class SignUpViewModelTest {
 
         viewModel.setEmail("email")
         viewModel.signUp()
-
+        launch { delay(1000) }
         verify {
-            launch { delay(1000) }
             errorEmailObserver.onChanged(true)
         }
     }
@@ -216,9 +207,8 @@ class SignUpViewModelTest {
 
         viewModel.setPassword("123")
         viewModel.signUp()
-
+        launch { delay(1000) }
         verify {
-            launch { delay(1000) }
             errorPassObserver.onChanged(true)
         }
     }
@@ -231,9 +221,8 @@ class SignUpViewModelTest {
 
         viewModel.setConfirmPassword("123")
         viewModel.signUp()
-
+        launch { delay(1000) }
         verify {
-            launch { delay(1000) }
             errorConfirmPassObserver.onChanged(true)
         }
     }
@@ -247,9 +236,8 @@ class SignUpViewModelTest {
         viewModel.setPassword("123456")
         viewModel.setConfirmPassword("123457")
         viewModel.signUp()
-
+        launch { delay(1000) }
         verify {
-            launch { delay(1000) }
             errorDiffPassObserver.onChanged(true)
         }
     }
