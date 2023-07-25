@@ -13,8 +13,11 @@ import io.mockk.verifySequence
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
@@ -59,7 +62,7 @@ class SignInViewModelTest {
     }
 
     @Test
-    fun `when call signIn then verify repository is called`() {
+    fun `when call signIn then verify repository is called`()  = runTest {
         setViewModel()
         val result: ResultState<Boolean> = mockk(relaxed = true)
         coEvery { repository.signIn(keepLogged = true, model = model) } returns result
@@ -67,12 +70,13 @@ class SignInViewModelTest {
         viewModel.signIn(keepLogged = true)
 
         coVerify {
+            launch { delay(1000) }
             repository.signIn(keepLogged = true, model = model)
         }
     }
 
     @Test
-    fun `when call signIn then verify repository returns success`() {
+    fun `when call signIn then verify repository returns success`() = runTest {
         setViewModel()
         val uiStateObserver: Observer<ResultState<Any>> = mockk(relaxed = true)
         viewModel.uiState.observeForever(uiStateObserver)
@@ -84,12 +88,13 @@ class SignInViewModelTest {
 
         verifySequence {
             uiStateObserver.onChanged(ResultState.Loading)
+            launch { delay(1000) }
             uiStateObserver.onChanged(result)
         }
     }
 
     @Test
-    fun `when call signIn then verify repository returns not found`() {
+    fun `when call signIn then verify repository returns not found`() = runTest {
         setViewModel()
         val uiStateObserver: Observer<ResultState<Any>> = mockk(relaxed = true)
         viewModel.uiState.observeForever(uiStateObserver)
@@ -101,12 +106,13 @@ class SignInViewModelTest {
 
         verifySequence {
             uiStateObserver.onChanged(ResultState.Loading)
+            launch { delay(1000) }
             uiStateObserver.onChanged(result)
         }
     }
 
     @Test
-    fun `when call signIn then verify repository returns error`() {
+    fun `when call signIn then verify repository returns error`() = runTest {
         setViewModel()
         val uiStateObserver: Observer<ResultState<Any>> = mockk(relaxed = true)
         viewModel.uiState.observeForever(uiStateObserver)
@@ -118,12 +124,13 @@ class SignInViewModelTest {
 
         verifySequence {
             uiStateObserver.onChanged(ResultState.Loading)
+            launch { delay(1000) }
             uiStateObserver.onChanged(result)
         }
     }
 
     @Test
-    fun `when call signIn then verify repository returns failure`() {
+    fun `when call signIn then verify repository returns failure`() = runTest {
         setViewModel()
         val uiStateObserver: Observer<ResultState<Any>> = mockk(relaxed = true)
         viewModel.uiState.observeForever(uiStateObserver)
@@ -135,12 +142,13 @@ class SignInViewModelTest {
 
         verifySequence {
             uiStateObserver.onChanged(ResultState.Loading)
+            launch { delay(1000) }
             uiStateObserver.onChanged(result)
         }
     }
 
     @Test
-    fun `when call signIn then verify email returns invalid`() {
+    fun `when call signIn then verify email returns invalid`() = runTest {
         setViewModel()
         val emailObserver: Observer<Boolean> = mockk(relaxed = true)
         viewModel.emailError.observeForever(emailObserver)
@@ -149,12 +157,13 @@ class SignInViewModelTest {
         viewModel.signIn(keepLogged = true)
 
         verify {
+            launch { delay(1000) }
             emailObserver.onChanged(true)
         }
     }
 
     @Test
-    fun `when call signIn then verify password returns invalid`() {
+    fun `when call signIn then verify password returns invalid`() = runTest {
         setViewModel()
         val passwordObserver: Observer<Boolean> = mockk(relaxed = true)
         viewModel.passwordError.observeForever(passwordObserver)
@@ -163,6 +172,7 @@ class SignInViewModelTest {
         viewModel.signIn(keepLogged = true)
 
         verify {
+            launch { delay(1000) }
             passwordObserver.onChanged(true)
         }
     }

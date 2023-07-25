@@ -91,29 +91,27 @@ class SignUpFragment: Fragment() {
 
     private fun handlerShowLoading() = with(binding) {
         btnSignup.showLoading()
-        cdtName.bindEnabled(false)
-        cdtBirthDate.bindEnabled(false)
-        cdtPhone.bindEnabled(false)
-        cdtEmail.bindEnabled(false)
-        cmpRadio.bindEnabled(false)
-        cdtPassword.bindEnabled(false)
-        cdtConfirmPassword.bindEnabled(false)
-        normalizeFields()
+        handlerEnableFields(isEnable = false)
+        handlerNormalizeFields()
 
     }
 
     private fun handlerHideLoading() = with(binding) {
         btnSignup.hideLoading()
-        cdtName.bindEnabled(true)
-        cdtBirthDate.bindEnabled(true)
-        cdtPhone.bindEnabled(true)
-        cdtEmail.bindEnabled(true)
-        cmpRadio.bindEnabled(true)
-        cdtPassword.bindEnabled(true)
-        cdtConfirmPassword.bindEnabled(true)
+        handlerEnableFields(isEnable = true)
     }
 
-    private fun normalizeFields() = with(binding) {
+    private fun handlerEnableFields(isEnable: Boolean) = with(binding) {
+        cdtName.bindEnabled(isEnable)
+        cdtBirthDate.bindEnabled(isEnable)
+        cdtPhone.bindEnabled(isEnable)
+        cdtEmail.bindEnabled(isEnable)
+        cmpRadio.bindEnabled(isEnable)
+        cdtPassword.bindEnabled(isEnable)
+        cdtConfirmPassword.bindEnabled(isEnable)
+    }
+
+    private fun handlerNormalizeFields() = with(binding) {
         cdtName.normalizeField()
         cdtBirthDate.normalizeField()
         cdtPhone.normalizeField()
@@ -129,7 +127,7 @@ class SignUpFragment: Fragment() {
         cdtEmail.clearField()
         cdtPassword.clearField()
         cdtConfirmPassword.clearField()
-        normalizeFields()
+        handlerNormalizeFields()
     }
 
     private fun handlerDataSuccess(model: SignUpModel) {
