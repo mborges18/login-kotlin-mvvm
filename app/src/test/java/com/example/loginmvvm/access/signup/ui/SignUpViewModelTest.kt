@@ -59,7 +59,7 @@ class SignUpViewModelTest {
         viewModel.setName("Marcio Borges")
         viewModel.setBirthDate("18/11/1981")
         viewModel.setPhone("(81) 98620-1853")
-        viewModel.setTypeMember("LEADER")
+        viewModel.setTypeMember("GOLD")
         viewModel.setEmail("teste@teste.com")
         viewModel.setPassword("A@123456")
         viewModel.setConfirmPassword("A@123456")

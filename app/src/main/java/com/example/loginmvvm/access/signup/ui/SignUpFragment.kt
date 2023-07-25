@@ -74,7 +74,7 @@ class SignUpFragment: Fragment() {
                 is ResultState.Error -> handlerMessageError()
                 is ResultState.Failure -> handlerMessageFailure()
                 is ResultState.NotFound -> Unit
-                is ResultState.Success -> handlerDataSuccess(it.data as SignUpModel)
+                is ResultState.Success -> handlerDataSuccess(it.data)
                 is ResultState.Exists -> handlerDataExists()
             }
         }
@@ -132,11 +132,11 @@ class SignUpFragment: Fragment() {
 
     private fun handlerDataSuccess(model: SignUpModel) {
         handlerHideLoading()
-        handlerClearFields()
         (activity as? AccessActivity)?.apply {
             email = model.email
             password = model.password
         }?.also {
+            handlerClearFields()
             it.gotoSignIn()
         }
     }
