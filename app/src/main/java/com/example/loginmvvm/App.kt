@@ -2,6 +2,7 @@ package com.example.loginmvvm
 
 import android.app.Application
 import com.example.loginmvvm.access.signin.di.SignInModule
+import com.example.loginmvvm.access.signup.di.SignUpModule
 import com.example.loginmvvm.common.data.local.cache.di.CacheModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -17,7 +18,8 @@ class App: Application() {
             koin.loadModules(
                 listOf(
                     CacheModule.instance,
-                    SignInModule.instance
+                    SignInModule.instance,
+                    SignUpModule.instance
                 )
             )
         }

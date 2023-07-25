@@ -32,4 +32,7 @@
         <attr name="comp_description" format="string" />
         <attr name="comp_icon" format="integer" />
     </declare-styleable>
+    <declare-styleable name="CompRadioButton">
+        <attr name="radio_names" format="reference"/>
+    </declare-styleable>
 </resources>

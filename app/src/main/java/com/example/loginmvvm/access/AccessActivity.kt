@@ -2,19 +2,23 @@ package com.example.loginmvvm.access
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.loginmvvm.R
 import com.example.loginmvvm.access.signin.ui.SignInFragment
+import com.example.loginmvvm.access.signup.ui.SignUpFragment
 import com.example.loginmvvm.databinding.ActivityAccessBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
+
 class AccessActivity : AppCompatActivity() {
 
+    var email: String = String()
+    var password: String = String()
     private lateinit var binding: ActivityAccessBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +30,7 @@ class AccessActivity : AppCompatActivity() {
 
     private fun setupTabs() {
         val adapter = AccessViewPagerAdapter(supportFragmentManager, lifecycle)
+        adapter.listFragment = listOf(SignInFragment.newInstance(), SignUpFragment.newInstance())
         binding.viewPagerAccess.adapter = adapter
 
         TabLayoutMediator(binding.tabAccess, binding.viewPagerAccess) { tab, position ->
@@ -34,6 +39,10 @@ class AccessActivity : AppCompatActivity() {
                 1 -> tab.text = getString(R.string.title_signup)
             }
         }.attach()
+    }
+
+    fun gotoSignIn() {
+        binding.viewPagerAccess.currentItem = 0
     }
 
     companion object {
@@ -48,11 +57,13 @@ class AccessViewPagerAdapter(
     lifecycle: Lifecycle
 ) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
+    var listFragment: List<Fragment> = listOf()
+
     override fun getItemCount(): Int {
-        return 2
+        return listFragment.size
     }
 
     override fun createFragment(position: Int): Fragment {
-        return SignInFragment.newInstance()
+        return listFragment[position]
     }
 }

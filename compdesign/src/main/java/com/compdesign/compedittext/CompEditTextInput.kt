@@ -44,9 +44,16 @@ class CompEditTextInput @JvmOverloads constructor(
         a.recycle()
     }
 
-    fun setData(value: String, listenerData: (text: String) -> Unit) {
-        ediText?.setText(value)
+    fun bind(value: String, listenerData: (text: String) -> Unit) {
         doListener(listenerData)
+        ediText?.setText(value)
+        ediText?.background = ContextCompat.getDrawable(context, R.drawable.border_edit_text_input)
+        handlerColor(R.color.colorGrayLight)
+        binding.tvHolder.animate().translationY(-VALUE_70).translationX(-VALUE_70).duration = DURATION
+    }
+
+    fun setData(value: String) {
+        ediText?.setText(value)
         ediText?.background = ContextCompat.getDrawable(context, R.drawable.border_edit_text_input)
         handlerColor(R.color.colorGrayLight)
         binding.tvHolder.animate().translationY(-VALUE_70).translationX(-VALUE_70).duration = DURATION
@@ -77,6 +84,13 @@ class CompEditTextInput @JvmOverloads constructor(
     fun normalizeField() {
         handlerClearError()
         handlerColor(R.color.colorGrayLight)
+        if (ediText?.text.toString().isEmpty()) {
+            binding.tvHolder.animate().translationY(VALUE_0)
+                .translationX(VALUE_0).duration = DURATION
+        } else {
+            binding.tvHolder.animate().translationY(-VALUE_70)
+                .translationX(-VALUE_70).duration = DURATION
+        }
     }
 
     fun bindEnabled(it: Boolean) {
