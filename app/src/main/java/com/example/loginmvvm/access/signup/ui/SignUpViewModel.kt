@@ -20,8 +20,8 @@ class SignUpViewModel(
     private val model: SignUpModel
 ): ViewModel() {
 
-    private val _uiState = MutableLiveData<ResultState<Any>>()
-    val uiState = _uiState as LiveData<ResultState<Any>>
+    private val _uiState = MutableLiveData<ResultState<SignUpModel>>()
+    val uiState = _uiState as LiveData<ResultState<SignUpModel>>
 
     private val _enableButton = MutableLiveData(false)
     val enableButton = _enableButton as LiveData<Boolean>
