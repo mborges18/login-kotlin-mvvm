@@ -8,6 +8,9 @@ Este é um projeto android estruturado em MVVM
 ## Gerenciador
 https://projects.zoho.com
 
+## Api
+https://console.catalyst.zoho.com
+
 ## Requisitos
 - Kotlin 1.8.20
 - Koin 3.4.1
