@@ -6,10 +6,11 @@ import com.example.loginmvvm.splash.data.repository.SplashRepository
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
-import kotlinx.coroutines.DelicateCoroutinesApi
+import io.mockk.verify
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.newSingleThreadContext
+import kotlinx.coroutines.test.TestDispatcher
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.After
@@ -17,28 +18,25 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class SplashViewModelTest {
 
     @get:Rule
     var testSchedulerRule = InstantTaskExecutorRule()
 
-    @OptIn(DelicateCoroutinesApi::class)
-    private val mainThreadSurrogate = newSingleThreadContext("Unit thread")
+    private val testDispatcher: TestDispatcher = UnconfinedTestDispatcher()
 
-    private val repository: SplashRepository = mockk(relaxed = true)
+    private val repository: SplashRepository = mockk()
     private val viewModel: SplashViewModel = SplashViewModel(repository)
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Before
     fun setUp() {
-        Dispatchers.setMain(mainThreadSurrogate)
+        Dispatchers.setMain(testDispatcher)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @After
     fun tearDown() {
         Dispatchers.resetMain()
-        mainThreadSurrogate.close()
     }
 
     @Test
@@ -59,7 +57,7 @@ class SplashViewModelTest {
 
         viewModel.getKeepLogged()
 
-        coVerify { observerConnected.onChanged(true) }
+        verify { observerConnected.onChanged(true) }
     }
 
     @Test
@@ -71,6 +69,6 @@ class SplashViewModelTest {
 
         viewModel.getKeepLogged()
 
-        coVerify { observerConnected.onChanged(false) }
+        verify { observerConnected.onChanged(false) }
     }
 }

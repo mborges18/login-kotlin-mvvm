@@ -10,49 +10,37 @@ import io.mockk.coVerify
 import io.mockk.mockk
 import io.mockk.verify
 import io.mockk.verifySequence
-import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.newSingleThreadContext
+import kotlinx.coroutines.test.TestDispatcher
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class SignUpViewModelTest {
 
     @get:Rule
     var testSchedulerRule = InstantTaskExecutorRule()
 
-    @OptIn(DelicateCoroutinesApi::class)
-    private val mainThreadSurrogate = newSingleThreadContext("Unit thread")
+    private val testDispatcher: TestDispatcher = UnconfinedTestDispatcher()
 
-    private lateinit var repository: SignUpRepository
-    private lateinit var model: SignUpModel
-    private lateinit var viewModel: SignUpViewModel
+    private val repository: SignUpRepository = mockk()
+    private var model: SignUpModel = SignUpModel()
+    private val viewModel: SignUpViewModel = SignUpViewModel(repository, model)
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Before
     fun setUp() {
-        Dispatchers.setMain(mainThreadSurrogate)
+        Dispatchers.setMain(testDispatcher)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @After
     fun tearDown() {
         Dispatchers.resetMain()
-        mainThreadSurrogate.close()
-    }
-
-    private fun setViewModel() {
-        repository = mockk(relaxed = true)
-        model = SignUpModel()
-        viewModel = SignUpViewModel(repository, model)
-        setData()
     }
 
     private fun setData() {
@@ -66,28 +54,28 @@ class SignUpViewModelTest {
     }
 
     @Test
-    fun `when call signUp then verify repository is called`() = runTest {
-        setViewModel()
+    fun `when call signUp then verify repository is called`() {
+        setData()
         val result: ResultState<SignUpModel> = mockk(relaxed = true)
         coEvery { repository.signUp(model = model) } returns result
 
         viewModel.signUp()
-        delay(2000)
+        
         coVerify {
             repository.signUp(model = model)
         }
     }
 
     @Test
-    fun `when call signUp then verify repository returns success`() = runTest {
-        setViewModel()
+    fun `when call signUp then verify repository returns success`() {
+        setData()
         val uiStateObserver: Observer<ResultState<Any>> = mockk(relaxed = true)
         viewModel.uiState.observeForever(uiStateObserver)
         val result: ResultState<SignUpModel> = ResultState.Success(mockk(relaxed = true))
 
         coEvery { repository.signUp(model = model) } returns result
         viewModel.signUp()
-        delay(2000)
+        
         verifySequence {
             uiStateObserver.onChanged(ResultState.Loading)
             uiStateObserver.onChanged(result)
@@ -95,15 +83,15 @@ class SignUpViewModelTest {
     }
 
     @Test
-    fun `when call signUp then verify repository returns error`()  = runTest {
-        setViewModel()
+    fun `when call signUp then verify repository returns error`() {
+        setData()
         val uiStateObserver: Observer<ResultState<Any>> = mockk(relaxed = true)
         viewModel.uiState.observeForever(uiStateObserver)
         val result: ResultState<SignUpModel> = ResultState.Error
 
         coEvery { repository.signUp(model = model) } returns result
         viewModel.signUp()
-        delay(2000)
+        
         verifySequence {
             uiStateObserver.onChanged(ResultState.Loading)
             uiStateObserver.onChanged(result)
@@ -111,15 +99,15 @@ class SignUpViewModelTest {
     }
 
     @Test
-    fun `when call signUp then verify repository returns exists`() = runTest {
-        setViewModel()
+    fun `when call signUp then verify repository returns exists`() {
+        setData()
         val uiStateObserver: Observer<ResultState<Any>> = mockk(relaxed = true)
         viewModel.uiState.observeForever(uiStateObserver)
         val result: ResultState<SignUpModel> = ResultState.Exists
 
         coEvery { repository.signUp(model = model) } returns result
         viewModel.signUp()
-        delay(2000)
+        
         verifySequence {
             uiStateObserver.onChanged(ResultState.Loading)
             uiStateObserver.onChanged(result)
@@ -127,15 +115,15 @@ class SignUpViewModelTest {
     }
 
     @Test
-    fun `when call signUp then verify repository returns failure`() = runTest {
-        setViewModel()
+    fun `when call signUp then verify repository returns failure`() {
+        setData()
         val uiStateObserver: Observer<ResultState<Any>> = mockk(relaxed = true)
         viewModel.uiState.observeForever(uiStateObserver)
         val result: ResultState<SignUpModel> = ResultState.Failure
 
         coEvery { repository.signUp(model = model) } returns result
         viewModel.signUp()
-        delay(2000)
+        
         verifySequence {
             uiStateObserver.onChanged(ResultState.Loading)
             uiStateObserver.onChanged(result)
@@ -143,99 +131,99 @@ class SignUpViewModelTest {
     }
 
     @Test
-    fun `when call signUp then verify valid name`()  = runTest {
-        setViewModel()
+    fun `when call signUp then verify valid name`() {
+        setData()
         val errorNameObserver: Observer<Boolean> = mockk(relaxed = true)
         viewModel.nameError.observeForever(errorNameObserver)
 
         viewModel.setName("Marcio")
         viewModel.signUp()
-        delay(2000)
+        
         verify {
             errorNameObserver.onChanged(true)
         }
     }
 
     @Test
-    fun `when call signUp then verify valid birthdate`() = runTest {
-        setViewModel()
+    fun `when call signUp then verify valid birthdate`() {
+        setData()
         val errorBirthdateObserver: Observer<Boolean> = mockk(relaxed = true)
         viewModel.birthDateError.observeForever(errorBirthdateObserver)
 
         viewModel.setBirthDate("18/11/198")
         viewModel.signUp()
-        delay(2000)
+        
         verify {
             errorBirthdateObserver.onChanged(true)
         }
     }
 
     @Test
-    fun `when call signUp then verify valid phone`() = runTest {
-        setViewModel()
+    fun `when call signUp then verify valid phone`() {
+        setData()
         val errorPhoneObserver: Observer<Boolean> = mockk(relaxed = true)
         viewModel.phoneError.observeForever(errorPhoneObserver)
 
         viewModel.setPhone("(81) 98620-185")
         viewModel.signUp()
-        delay(2000)
+        
         verify {
             errorPhoneObserver.onChanged(true)
         }
     }
 
     @Test
-    fun `when call signUp then verify valid email`() = runTest {
-        setViewModel()
+    fun `when call signUp then verify valid email`() {
+        setData()
         val errorEmailObserver: Observer<Boolean> = mockk(relaxed = true)
         viewModel.emailError.observeForever(errorEmailObserver)
 
         viewModel.setEmail("email")
         viewModel.signUp()
-        delay(2000)
+        
         verify {
             errorEmailObserver.onChanged(true)
         }
     }
 
     @Test
-    fun `when call signUp then verify valid password`() = runTest {
-        setViewModel()
+    fun `when call signUp then verify valid password`() {
+        setData()
         val errorPassObserver: Observer<Boolean> = mockk(relaxed = true)
         viewModel.passwordError.observeForever(errorPassObserver)
 
         viewModel.setPassword("123")
         viewModel.signUp()
-        delay(2000)
+        
         verify {
             errorPassObserver.onChanged(true)
         }
     }
 
     @Test
-    fun `when call signUp then verify valid confirm password`() = runTest {
-        setViewModel()
+    fun `when call signUp then verify valid confirm password`() {
+        setData()
         val errorConfirmPassObserver: Observer<Boolean> = mockk(relaxed = true)
         viewModel.confirmPasswordError.observeForever(errorConfirmPassObserver)
 
         viewModel.setConfirmPassword("123")
         viewModel.signUp()
-        delay(2000)
+        
         verify {
             errorConfirmPassObserver.onChanged(true)
         }
     }
 
     @Test
-    fun `when call signUp then verify valid difference password`() = runTest {
-        setViewModel()
+    fun `when call signUp then verify valid difference password`() {
+        setData()
         val errorDiffPassObserver: Observer<Boolean> = mockk(relaxed = true)
         viewModel.differentPasswords.observeForever(errorDiffPassObserver)
 
         viewModel.setPassword("123456")
         viewModel.setConfirmPassword("123457")
         viewModel.signUp()
-        delay(2000)
+        
         verify {
             errorDiffPassObserver.onChanged(true)
         }
