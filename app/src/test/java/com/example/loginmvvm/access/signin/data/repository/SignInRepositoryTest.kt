@@ -63,4 +63,17 @@ class SignInRepositoryTest {
 
         Assert.assertEquals(true, resultState is ResultState.Error)
     }
+
+    @Test
+    fun `given failure signIn then return API result`() {
+        coEvery {
+            api.signIn(signInRequest)
+        }.throws(Throwable())
+
+        runBlocking {
+            resultState = repository.signIn(signInModel, true)
+        }
+
+        Assert.assertEquals(true, resultState is ResultState.Failure)
+    }
 }

@@ -4,6 +4,7 @@ import android.app.Application
 import com.example.loginmvvm.access.signin.di.SignInModule
 import com.example.loginmvvm.access.signup.di.SignUpModule
 import com.example.loginmvvm.common.data.local.cache.di.CacheModule
+import com.example.loginmvvm.home.di.HomeModule
 import com.example.loginmvvm.splash.di.SplashModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -21,7 +22,8 @@ class App: Application() {
                     CacheModule.instance,
                     SplashModule.instance,
                     SignInModule.instance,
-                    SignUpModule.instance
+                    SignUpModule.instance,
+                    HomeModule.instance
                 )
             )
         }

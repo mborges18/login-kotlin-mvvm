@@ -94,4 +94,17 @@ class SignUpRepositoryTest {
 
         Assert.assertEquals(true, resultState is ResultState.Error)
     }
+
+    @Test
+    fun `given failure signUp then return API result`() {
+        coEvery {
+            api.signUp(signUpRequest)
+        }.throws(Throwable())
+
+        runBlocking {
+            resultState = repository.signUp(signUpModel)
+        }
+
+        Assert.assertEquals(true, resultState is ResultState.Failure)
+    }
 }
