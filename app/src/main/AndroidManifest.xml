@@ -29,7 +29,7 @@
             android:name=".access.AccessActivity"
             android:exported="false" />
         <activity
-            android:name=".main.MainActivity"
+            android:name=".home.ui.HomeActivity"
             android:exported="false" />
     </application>
 

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.loginmvvm.main.MainActivity
+import com.example.loginmvvm.home.ui.HomeActivity
 import com.example.loginmvvm.R
 import com.example.loginmvvm.access.AccessActivity
 import com.example.loginmvvm.common.message.Message
@@ -83,7 +83,7 @@ class SignInFragment: Fragment() {
     }
 
     private fun handlerDataSuccess() {
-        startActivity(MainActivity.newIntent(requireContext()))
+        startActivity(HomeActivity.newIntent(requireContext()))
         activity?.finish()
     }
 

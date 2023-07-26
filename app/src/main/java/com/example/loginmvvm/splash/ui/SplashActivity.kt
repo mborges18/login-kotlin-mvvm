@@ -7,7 +7,7 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.example.loginmvvm.access.AccessActivity
 import com.example.loginmvvm.databinding.ActivitySplashBinding
-import com.example.loginmvvm.main.MainActivity
+import com.example.loginmvvm.home.ui.HomeActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @SuppressLint("CustomSplashScreen")
@@ -29,7 +29,7 @@ class SplashActivity : AppCompatActivity() {
         viewModel.keepLogged.observe(this) {
             Handler(Looper.getMainLooper()).postDelayed({
                 if (it) {
-                    startActivity(MainActivity.newIntent(this))
+                    startActivity(HomeActivity.newIntent(this))
                     finish()
                 } else {
                     startActivity(AccessActivity.newIntent(this))
