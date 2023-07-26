@@ -4,6 +4,7 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
 import java.util.Date
 import java.util.Locale
 
@@ -16,7 +17,7 @@ object DateUtil {
         return try {
             val format: DateTimeFormatter = DateTimeFormatter.ofPattern(DATE_BR)
             return LocalDate.parse(this, format).toString()
-        }catch (e: Exception) {
+        }catch (e: DateTimeParseException) {
             this
         }
     }
@@ -27,7 +28,7 @@ object DateUtil {
             val date: Date = formatUS.parse(this) as Date
             val formatBR: DateFormat = SimpleDateFormat(DATE_BR, Locale.getDefault())
             formatBR.format(date)
-        }catch (e: Exception) {
+        }catch (e: DateTimeParseException) {
             this
         }
     }
