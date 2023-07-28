@@ -1,4 +1,4 @@
-package com.example.loginmvvm.home.domain
+package com.example.loginmvvm.home.model
 
 data class CustomerModel(
     val name: String,

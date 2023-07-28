@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.loginmvvm.common.result.ResultState
 import com.example.loginmvvm.home.data.repository.HomeRepository
-import com.example.loginmvvm.home.domain.CustomerModel
+import com.example.loginmvvm.home.model.CustomerModel
 import kotlinx.coroutines.launch
 
 class HomeViewModel(

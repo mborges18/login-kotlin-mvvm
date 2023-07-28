@@ -1,12 +1,14 @@
 package com.example.loginmvvm.splash.data.cache
 
 import com.example.loginmvvm.common.data.local.cache.Cache
+import io.mockk.coEvery
+import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Test
 
 class SplashCacheTest {
-    private lateinit var cache: Cache
+    private val cache: Cache = mockk(relaxed = true)
     private lateinit var splashCache: SplashCache
 
     @Test
@@ -24,12 +26,7 @@ class SplashCacheTest {
     }
 
     private fun startCache(isKeepLogged: Boolean) {
-        cache = object : Cache {
-            override suspend fun insert(key: String, value: String) = Unit
-            override suspend fun update(key: String, value: String)  = Unit
-            override suspend fun delete(key: String)  = Unit
-            override suspend fun get(key: String) = isKeepLogged.toString()
-        }
+        coEvery { cache.get("KEEP_LOGGED") } returns isKeepLogged.toString()
         splashCache = SplashCacheImpl(cache)
     }
 }
