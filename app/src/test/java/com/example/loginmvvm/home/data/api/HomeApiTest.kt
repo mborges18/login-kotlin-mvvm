@@ -31,6 +31,6 @@ class HomeApiTest {
 
         val request = server.takeRequest()
         TestCase.assertEquals("GET", request.method)
-        TestCase.assertEquals("/customer/1", request.path)
+        TestCase.assertEquals("/customer", request.path)
     }
 }
