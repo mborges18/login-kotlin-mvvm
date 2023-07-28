@@ -3,7 +3,7 @@ package com.example.loginmvvm.access.signin.di
 import com.example.loginmvvm.access.signin.data.api.SignInApi
 import com.example.loginmvvm.access.signin.data.repository.SignInRepository
 import com.example.loginmvvm.access.signin.data.repository.SignInRepositoryImpl
-import com.example.loginmvvm.access.signin.domain.SignInModel
+import com.example.loginmvvm.access.signin.model.SignInModel
 import com.example.loginmvvm.access.signin.ui.SignInViewModel
 import com.example.loginmvvm.common.data.remote.ApiClient
 import org.koin.androidx.viewmodel.dsl.viewModel

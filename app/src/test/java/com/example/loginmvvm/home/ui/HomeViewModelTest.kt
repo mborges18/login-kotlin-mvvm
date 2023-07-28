@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.example.loginmvvm.common.result.ResultState
 import com.example.loginmvvm.home.data.repository.HomeRepository
-import com.example.loginmvvm.home.domain.CustomerModel
+import com.example.loginmvvm.home.model.CustomerModel
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk

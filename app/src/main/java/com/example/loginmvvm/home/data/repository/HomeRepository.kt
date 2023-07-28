@@ -6,7 +6,7 @@ import com.example.loginmvvm.common.data.local.cache.CacheImpl.Companion.USER_ID
 import com.example.loginmvvm.common.result.ResultState
 import com.example.loginmvvm.home.data.api.HomeApi
 import com.example.loginmvvm.home.data.model.toModel
-import com.example.loginmvvm.home.domain.CustomerModel
+import com.example.loginmvvm.home.model.CustomerModel
 
 class HomeRepositoryImpl(
     private val api: HomeApi,

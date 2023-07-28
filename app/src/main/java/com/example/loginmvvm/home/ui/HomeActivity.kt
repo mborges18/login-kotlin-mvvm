@@ -7,7 +7,7 @@ import android.os.Bundle
 import androidx.core.view.isVisible
 import com.example.loginmvvm.common.result.ResultState
 import com.example.loginmvvm.databinding.ActivityHomeBinding
-import com.example.loginmvvm.home.domain.CustomerModel
+import com.example.loginmvvm.home.model.CustomerModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeActivity : AppCompatActivity() {

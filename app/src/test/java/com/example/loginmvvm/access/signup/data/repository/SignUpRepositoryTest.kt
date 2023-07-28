@@ -3,10 +3,10 @@ package com.example.loginmvvm.access.signup.data.repository
 import com.example.loginmvvm.access.signup.data.api.SignUpApi
 import com.example.loginmvvm.access.signup.data.model.SignUpRequest
 import com.example.loginmvvm.access.signup.data.model.SignUpResponse
-import com.example.loginmvvm.access.signup.domain.SignUpModel
-import com.example.loginmvvm.access.signup.domain.TypeMemberEnum
-import com.example.loginmvvm.access.signup.domain.TypeStatusEnum
-import com.example.loginmvvm.access.signup.domain.toRequest
+import com.example.loginmvvm.access.signup.model.SignUpModel
+import com.example.loginmvvm.access.signup.model.TypeMemberEnum
+import com.example.loginmvvm.access.signup.model.TypeStatusEnum
+import com.example.loginmvvm.access.signup.model.toRequest
 import com.example.loginmvvm.common.isNotNull
 import com.example.loginmvvm.common.result.ResultState
 import io.mockk.coEvery

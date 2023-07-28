@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.loginmvvm.R
 import com.example.loginmvvm.access.AccessActivity
-import com.example.loginmvvm.access.signup.domain.SignUpModel
-import com.example.loginmvvm.access.signup.domain.TypeMemberEnum
+import com.example.loginmvvm.access.signup.model.SignUpModel
+import com.example.loginmvvm.access.signup.model.TypeMemberEnum
 import com.example.loginmvvm.common.message.Message
 import com.example.loginmvvm.common.result.ResultState
 import com.example.loginmvvm.databinding.FragmentSignupBinding

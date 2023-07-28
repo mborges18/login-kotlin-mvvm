@@ -3,7 +3,7 @@ package com.example.loginmvvm.access.signup.ui
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.example.loginmvvm.access.signup.data.repository.SignUpRepository
-import com.example.loginmvvm.access.signup.domain.SignUpModel
+import com.example.loginmvvm.access.signup.model.SignUpModel
 import com.example.loginmvvm.common.result.ResultState
 import io.mockk.coEvery
 import io.mockk.coVerify

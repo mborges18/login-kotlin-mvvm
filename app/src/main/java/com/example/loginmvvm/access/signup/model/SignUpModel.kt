@@ -1,4 +1,4 @@
-package com.example.loginmvvm.access.signup.domain
+package com.example.loginmvvm.access.signup.model
 
 import android.os.Parcelable
 import com.example.loginmvvm.access.signup.data.model.SignUpRequest

@@ -1,7 +1,7 @@
 package com.example.loginmvvm.access.signup.data.model
 
-import com.example.loginmvvm.access.signup.domain.TypeMemberEnum
-import com.example.loginmvvm.access.signup.domain.TypeStatusEnum
+import com.example.loginmvvm.access.signup.model.TypeMemberEnum
+import com.example.loginmvvm.access.signup.model.TypeStatusEnum
 import com.google.gson.annotations.SerializedName
 
 data class SignUpResponse(

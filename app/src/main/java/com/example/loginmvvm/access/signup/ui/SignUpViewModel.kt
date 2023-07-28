@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.loginmvvm.access.signup.data.repository.SignUpRepository
-import com.example.loginmvvm.access.signup.domain.SignUpModel
-import com.example.loginmvvm.access.signup.domain.TypeMemberEnum
+import com.example.loginmvvm.access.signup.model.SignUpModel
+import com.example.loginmvvm.access.signup.model.TypeMemberEnum
 import com.example.loginmvvm.common.result.ResultState
 import com.example.loginmvvm.common.validation.isBirthDateValid
 import com.example.loginmvvm.common.validation.isCellPhoneValid

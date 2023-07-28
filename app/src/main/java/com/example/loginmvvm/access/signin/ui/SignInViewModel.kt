@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.loginmvvm.access.signin.data.repository.SignInRepository
-import com.example.loginmvvm.access.signin.domain.SignInModel
+import com.example.loginmvvm.access.signin.model.SignInModel
 import com.example.loginmvvm.common.result.ResultState
 import com.example.loginmvvm.common.validation.isEmailValid
 import com.example.loginmvvm.common.validation.isPasswordValid

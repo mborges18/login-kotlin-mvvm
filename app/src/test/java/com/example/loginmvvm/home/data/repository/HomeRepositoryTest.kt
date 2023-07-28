@@ -5,7 +5,7 @@ import com.example.loginmvvm.common.result.ResultState
 import com.example.loginmvvm.home.data.api.HomeApi
 import com.example.loginmvvm.home.data.model.CustomerResponse
 import com.example.loginmvvm.home.data.model.toModel
-import com.example.loginmvvm.home.domain.CustomerModel
+import com.example.loginmvvm.home.model.CustomerModel
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking

@@ -1,8 +1,8 @@
 package com.example.loginmvvm.access.signin.data.repository
 
 import com.example.loginmvvm.access.signin.data.api.SignInApi
-import com.example.loginmvvm.access.signin.domain.SignInModel
-import com.example.loginmvvm.access.signin.domain.toRequest
+import com.example.loginmvvm.access.signin.model.SignInModel
+import com.example.loginmvvm.access.signin.model.toRequest
 import com.example.loginmvvm.common.data.SUCCESS
 import com.example.loginmvvm.common.data.NOT_FOUND
 import com.example.loginmvvm.common.data.local.cache.Cache

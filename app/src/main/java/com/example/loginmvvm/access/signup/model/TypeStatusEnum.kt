@@ -1,4 +1,4 @@
-package com.example.loginmvvm.access.signup.domain
+package com.example.loginmvvm.access.signup.model
 
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
