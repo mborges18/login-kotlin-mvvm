@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:paddingHorizontal="@dimen/space_16dp"
+        android:paddingVertical="@dimen/space_16dp"
+        android:background="@color/white">
+
+        <com.compdesign.compheader.CompHeader
+            android:id="@+id/ch_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:comp_title="@string/title_signin"
+            app:comp_icon="@drawable/ic_new_unlock"
+            app:comp_subtitle="@string/txt_saudation"
+            app:comp_description="@string/txt_info_signin" />
+
+        <com.compdesign.compedittext.CompEditTextInput
+            android:id="@+id/cdt_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_16dp"
+            android:drawableStart="@drawable/ic_new_email"
+            android:inputType="text"
+            android:maxLength="55"
+            app:comp_id="@+id/edtEmail"
+            app:comp_hint="@string/hint_email"
+            app:comp_mask="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ch_header" />
+
+        <com.compdesign.compedittext.CompEditTextInput
+            android:id="@+id/cdt_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_16dp"
+            android:drawableStart="@drawable/ic_new_keys"
+            android:inputType="textPassword"
+            android:maxLength="12"
+            app:comp_id="@+id/edtPassword"
+            app:comp_endIconAction="password_toggle"
+            app:comp_hint="@string/hint_password"
+            app:comp_mask="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cdt_email" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/swt_keep_logged"
+            android:layout_width="48dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="@dimen/space_16dp"
+            app:track="@drawable/toggle_track_btn"
+            android:thumb="@drawable/toggle_thumb_btn"
+            app:layout_constraintStart_toStartOf="@+id/cdt_password"
+            app:layout_constraintTop_toBottomOf="@+id/cdt_password" />
+
+        <TextView
+            android:id="@+id/txv_keep_logged"
+            style="@style/TextNormal"
+            android:layout_marginStart="@dimen/space_8dp"
+            android:text="@string/txt_keep_logged"
+            app:layout_constraintBottom_toBottomOf="@+id/swt_keep_logged"
+            app:layout_constraintStart_toEndOf="@+id/swt_keep_logged"
+            app:layout_constraintTop_toTopOf="@+id/swt_keep_logged" />
+
+        <com.compdesign.compbutton.CompPrimeButton
+            android:id="@+id/btn_signin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:comp_prime_icon="@drawable/ic_new_login"
+            app:comp_prime_text="@string/act_enter"
+            android:layout_marginTop="@dimen/space_16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/swt_keep_logged" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

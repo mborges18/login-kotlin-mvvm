@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="52dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/blue"
+    app:cardCornerRadius="@dimen/space_4dp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/cpb_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:drawableLeft="@drawable/ic_new_login"
+        android:drawablePadding="8dp"
+        android:fontFamily="@font/stellar_bold"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_13sp"
+        android:textStyle="bold"
+        app:drawableTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:textAllCaps="true"
+        tools:text="Title" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/cpb_loader"
+        android:layout_width="25dp"
+        android:layout_height="15dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_gif_loader" />
+
+</androidx.cardview.widget.CardView>

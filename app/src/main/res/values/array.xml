@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="type_members">
+        <item>Líder|true</item>
+        <item>Discípulo|false</item>
+    </array>
+
+    <array name="type_status">
+        <item>Ativo|true</item>
+        <item>Inativo|false</item>
+    </array>
+</resources>

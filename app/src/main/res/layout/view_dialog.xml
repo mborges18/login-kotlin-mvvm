@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutDialog"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/space_16dp"
+    android:paddingVertical="@dimen/space_16dp"
+    android:gravity="center"
+    android:background="@drawable/border_default">
+
+    <ImageView
+        android:id="@+id/iconArlert"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_new_success"
+        android:contentDescription="@string/desc_image" />
+
+    <TextView
+        android:id="@+id/tvMsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_16dp"
+        android:gravity="center"
+        tools:text="Ação efetuada com sucesso Ação"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnOk"
+        style="@style/Button"
+        android:layout_marginTop="@dimen/space_32dp"
+        android:text="@string/act_ok"
+        android:background="@color/colorGreen" />
+</androidx.appcompat.widget.LinearLayoutCompat>
