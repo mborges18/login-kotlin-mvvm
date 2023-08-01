@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="52dp"
+    android:layout_height="@dimen/space_50dp"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardBackgroundColor="@color/blue"
     app:cardCornerRadius="@dimen/space_4dp">
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:drawableLeft="@drawable/ic_new_login"
-        android:drawablePadding="8dp"
+        android:drawablePadding="@dimen/space_8dp"
         android:fontFamily="@font/stellar_bold"
         android:gravity="center"
         android:textColor="@color/white"
@@ -30,8 +30,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/cpb_loader"
-        android:layout_width="25dp"
-        android:layout_height="15dp"
+        android:layout_width="@dimen/space_26dp"
+        android:layout_height="@dimen/space_16dp"
         android:layout_gravity="center"
         android:gravity="center"
         android:visibility="gone"

@@ -26,20 +26,14 @@ class SplashActivity : AppCompatActivity() {
     private fun handlerScreens() {
         viewModel.getKeepLogged()
 
-        viewModel.keepLogged.observe(this) {
-            Handler(Looper.getMainLooper()).postDelayed({
-                if (it) {
-                    startActivity(HomeActivity.newIntent(this))
-                    finish()
-                } else {
-                    startActivity(AccessActivity.newIntent(this))
-                    finish()
-                }
-            }, TIMER)
+        viewModel.gotoHome.observe(this) {
+            startActivity(HomeActivity.newIntent(this))
+            finish()
         }
-    }
 
-    companion object {
-        const val TIMER = 4000L
+        viewModel.gotoAccess.observe(this) {
+            startActivity(AccessActivity.newIntent(this))
+            finish()
+        }
     }
 }

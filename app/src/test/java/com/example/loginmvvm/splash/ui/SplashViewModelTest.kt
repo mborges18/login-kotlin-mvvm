@@ -9,9 +9,11 @@ import io.mockk.mockk
 import io.mockk.verify
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.TestDispatcher
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
@@ -28,6 +30,7 @@ class SplashViewModelTest {
 
     private val repository: SplashRepository = mockk()
     private val viewModel: SplashViewModel = SplashViewModel(repository)
+    private val observerConnected : Observer<Unit> = mockk(relaxed = true)
 
     @Before
     fun setUp() {
@@ -40,35 +43,33 @@ class SplashViewModelTest {
     }
 
     @Test
-    fun `when call repository then verify repository is called`() {
+    fun `when call repository then verify repository is called`() = runTest {
         coEvery { repository.getKeepLogged() } returns true
 
         viewModel.getKeepLogged()
-
+        delay(2000)
         coVerify { repository.getKeepLogged() }
     }
 
     @Test
-    fun `when call getKeepLogged then return user connected`() {
-        val observerConnected : Observer<Boolean> = mockk(relaxed = true)
-        viewModel.keepLogged.observeForever(observerConnected)
+    fun `when call getKeepLogged then return user connected`() = runTest {
+        viewModel.gotoHome.observeForever(observerConnected)
 
         coEvery { repository.getKeepLogged() } returns true
 
         viewModel.getKeepLogged()
-
-        verify { observerConnected.onChanged(true) }
+        delay(2000)
+        verify { observerConnected.onChanged(Unit) }
     }
 
     @Test
-    fun `when call getKeepLogged then return user not connected`() {
-        val observerConnected : Observer<Boolean> = mockk(relaxed = true)
-        viewModel.keepLogged.observeForever(observerConnected)
+    fun `when call getKeepLogged then return user not connected`() = runTest {
+        viewModel.gotoAccess.observeForever(observerConnected)
 
         coEvery { repository.getKeepLogged() } returns false
 
         viewModel.getKeepLogged()
-
-        verify { observerConnected.onChanged(false) }
+        delay(2000)
+        verify { observerConnected.onChanged(Unit) }
     }
 }

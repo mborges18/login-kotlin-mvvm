@@ -16,9 +16,17 @@ class HomeViewModel(
     private val _uiState: MutableLiveData<ResultState<CustomerModel>> = MutableLiveData()
     val uiState = _uiState as LiveData<ResultState<CustomerModel>>
 
+    private val _logout: MutableLiveData<Boolean> = MutableLiveData(false)
+    val logout = _logout as LiveData<Boolean>
+
     fun getCustomer() = viewModelScope.launch {
         _uiState.postValue(ResultState.Loading)
         val response = repository.getCustomer()
         _uiState.postValue(response)
+    }
+
+    fun logout() = viewModelScope.launch {
+        val response = repository.logout()
+        _logout.postValue(response)
     }
 }
