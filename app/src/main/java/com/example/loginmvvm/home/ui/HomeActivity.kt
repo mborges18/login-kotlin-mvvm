@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.view.isVisible
+import com.example.loginmvvm.R
 import com.example.loginmvvm.common.result.ResultState
 import com.example.loginmvvm.databinding.ActivityHomeBinding
 import com.example.loginmvvm.home.model.CustomerModel
@@ -45,11 +46,13 @@ class HomeActivity : AppCompatActivity() {
 
     private fun handlerSuccess(model: CustomerModel)= with(binding) {
         handlerHideLoading()
-        txvName.text = model.name
-        txvBirthdate.text = model.birthdate
-        txvPhone.text = model.phone
-        txvEmail.text = model.email
-        txvType.text = model.type
+        model.apply {
+            txvName.text = getString(R.string.s_name, name)
+            txvBirthdate.text = getString(R.string.s_birthdate, birthdate)
+            txvPhone.text = getString(R.string.s_phone, phone)
+            txvEmail.text = getString(R.string.s_email, email)
+            txvType.text = getString(R.string.s_type, type)
+        }
     }
 
     private fun handlerError() {

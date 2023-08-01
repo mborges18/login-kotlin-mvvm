@@ -19,6 +19,12 @@
     <string name="txt_info_signin">Informe seu e-mail e senha para acessar à sua área.</string>
     <string name="txt_info_signup">Informe seus dados para se cadastrar.</string>
 
+    <string name="s_name">Nome: %s</string>
+    <string name="s_birthdate">Data de nascimento: %s</string>
+    <string name="s_phone">Telefone: %s</string>
+    <string name="s_email">E-mail: %s</string>
+    <string name="s_type">Tipo de cliente: %s</string>
+
     <string name="act_enter">Entrar</string>
     <string name="act_register">Cadastrar</string>
     <string name="act_ok">OK</string>

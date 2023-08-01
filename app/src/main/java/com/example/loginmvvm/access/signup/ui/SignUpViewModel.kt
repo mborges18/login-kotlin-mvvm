@@ -143,7 +143,7 @@ class SignUpViewModel(
         }
 
         if (
-            isValidPassword(model) &&
+            isDifferentPassword(model) &&
             model.confirmPassword != model.password
         ) {
             isError = true
@@ -153,6 +153,7 @@ class SignUpViewModel(
         return isError
     }
 
-    private fun isValidPassword(user: SignUpModel) = user.password.isNotEmpty() && user.confirmPassword.isNotEmpty() &&
+    private fun isDifferentPassword(user: SignUpModel) =
+        user.password.isNotEmpty() && user.confirmPassword.isNotEmpty() &&
             user.password.isPasswordValid() && user.confirmPassword.isPasswordValid()
 }
