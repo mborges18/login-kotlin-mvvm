@@ -8,6 +8,7 @@ import com.example.loginmvvm.home.model.CustomerModel
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
+import io.mockk.verify
 import io.mockk.verifySequence
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -30,6 +31,8 @@ class HomeViewModelTest {
 
     private val repository: HomeRepository = mockk()
     private val viewModel: HomeViewModel = HomeViewModel(repository)
+    val uiStateObserver: Observer<ResultState<Any>> = mockk(relaxed = true)
+    val logoutObserver: Observer<Boolean> = mockk(relaxed = true)
 
     @Before
     fun setUp() {
@@ -54,7 +57,6 @@ class HomeViewModelTest {
 
     @Test
     fun `when call get customer then verify repository returns success`(){
-        val uiStateObserver: Observer<ResultState<Any>> = mockk(relaxed = true)
         viewModel.uiState.observeForever(uiStateObserver)
         val result: ResultState<CustomerModel> = ResultState.Success(mockk())
 
@@ -70,7 +72,6 @@ class HomeViewModelTest {
 
     @Test
     fun `when call get customer then verify repository returns error`(){
-        val uiStateObserver: Observer<ResultState<Any>> = mockk(relaxed = true)
         viewModel.uiState.observeForever(uiStateObserver)
         val result: ResultState<CustomerModel> = ResultState.Error
 
@@ -86,7 +87,6 @@ class HomeViewModelTest {
 
     @Test
     fun `when call get customer then verify repository returns failure`(){
-        val uiStateObserver: Observer<ResultState<Any>> = mockk(relaxed = true)
         viewModel.uiState.observeForever(uiStateObserver)
         val result: ResultState<CustomerModel> = ResultState.Failure
 
@@ -98,5 +98,16 @@ class HomeViewModelTest {
             uiStateObserver.onChanged(ResultState.Loading)
             uiStateObserver.onChanged(result)
         }
+    }
+
+    @Test
+    fun `when call logout then clear data login`(){
+        viewModel.logout.observeForever(logoutObserver)
+
+        coEvery { repository.logout() } returns true
+
+        viewModel.logout()
+
+        verify { logoutObserver.onChanged(true) }
     }
 }

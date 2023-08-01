@@ -8,7 +8,8 @@ import com.example.loginmvvm.home.data.model.toModel
 import com.example.loginmvvm.home.model.CustomerModel
 import io.mockk.coEvery
 import io.mockk.mockk
-import kotlinx.coroutines.runBlocking
+import junit.framework.TestCase
+import kotlinx.coroutines.test.runTest
 import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.Assert
 import org.junit.Before
@@ -37,14 +38,12 @@ class HomeRepositoryTest {
     }
 
     @Test
-    fun `given success customer then return API result`() {
+    fun `given success customer then return API result`()  = runTest {
         coEvery {
             api.getCustomer("1")
         } returns Response.success(response)
 
-        runBlocking {
-            resultState = repository.getCustomer()
-        }
+        resultState = repository.getCustomer()
 
         Assert.assertEquals(true, resultState is ResultState.Success)
         Assert.assertEquals(response.toModel(), (resultState as ResultState.Success).data)
@@ -55,28 +54,34 @@ class HomeRepositoryTest {
     }
 
     @Test
-    fun `given error customer then return API result`() {
+    fun `given error customer then return API result`()  = runTest {
         coEvery {
             api.getCustomer("1")
         } returns Response.error(400, "message".toResponseBody())
 
-        runBlocking {
-            resultState = repository.getCustomer()
-        }
+        resultState = repository.getCustomer()
 
         Assert.assertEquals(true, resultState is ResultState.Error)
     }
 
     @Test
-    fun `given failure customer then return API result`() {
+    fun `given failure customer then return API result`() = runTest {
         coEvery {
             api.getCustomer("1")
         }.throws(Throwable())
 
-        runBlocking {
-            resultState = repository.getCustomer()
-        }
+        resultState = repository.getCustomer()
 
         Assert.assertEquals(true, resultState is ResultState.Failure)
+    }
+
+    @Test
+    fun `given logout customer then return CACHE result`() = runTest {
+        coEvery { cache.get("USER_ID") } returns ""
+        coEvery { cache.get("USER_KEEP_LOGGED") } returns ""
+
+        val resultLogout = repository.logout()
+
+        TestCase.assertEquals(true, resultLogout)
     }
 }
