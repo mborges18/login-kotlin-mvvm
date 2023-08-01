@@ -48,14 +48,14 @@ class CompEditTextInput @JvmOverloads constructor(
         doListener(listenerData)
         ediText?.setText(value)
         ediText?.background = ContextCompat.getDrawable(context, R.drawable.border_edit_text_input)
-        handlerColor(R.color.colorGrayLight)
+        handlerColorIconAndText(R.color.colorGrayLight)
         binding.tvHolder.animate().translationY(-VALUE_70).translationX(-VALUE_70).duration = DURATION
     }
 
     fun setData(value: String) {
         ediText?.setText(value)
         ediText?.background = ContextCompat.getDrawable(context, R.drawable.border_edit_text_input)
-        handlerColor(R.color.colorGrayLight)
+        handlerColorIconAndText(R.color.colorGrayLight)
         binding.tvHolder.animate().translationY(-VALUE_70).translationX(-VALUE_70).duration = DURATION
     }
 
@@ -73,17 +73,17 @@ class CompEditTextInput @JvmOverloads constructor(
 
     fun setError(msg: String) {
         ediText?.clearFocus()
-        handlerColor(R.color.colorGrayLight)
+        handlerColorIconAndText(R.color.colorGrayLight)
         ediText?.setTextColor(ContextCompat.getColor(context, R.color.colorRed))
         ediText?.background = ContextCompat.getDrawable(context, R.drawable.border_edit_text_error)
-        handlerColor(R.color.colorRed)
+        handlerColorIconAndText(R.color.colorRed)
         binding.tvError.isVisible = true
         binding.tvError.text = msg
     }
 
     fun normalizeField() {
         handlerClearError()
-        handlerColor(R.color.colorGrayLight)
+        handlerColorIconAndText(R.color.colorGrayLight)
         if (ediText?.text.toString().isEmpty()) {
             binding.tvHolder.animate().translationY(VALUE_0)
                 .translationX(VALUE_0).duration = DURATION
@@ -134,16 +134,16 @@ class CompEditTextInput @JvmOverloads constructor(
     private fun doCounter(value: String, counter: String) = "$value de $counter"
 
     private fun handlerColorActive() {
-        handlerColor(R.color.colorGrayLight)
+        handlerColorIconAndText(R.color.colorGrayLight)
         ediText?.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 handlerClearError()
-                handlerColor(R.color.blue)
+                handlerColorIconAndText(R.color.blue)
                 binding.tvHolder.animate().translationY(-VALUE_70)
                     .translationX(-VALUE_70).duration = DURATION
             } else {
                 if (binding.tvError.isVisible.not()) {
-                    handlerColor(R.color.colorGrayLight)
+                    handlerColorIconAndText(R.color.colorGrayLight)
                 }
                 if (ediText?.text.toString().isEmpty()) {
                     binding.tvHolder.animate().translationY(VALUE_0)
@@ -153,7 +153,7 @@ class CompEditTextInput @JvmOverloads constructor(
         }
     }
 
-    private fun handlerColor(color: Int) {
+    private fun handlerColorIconAndText(color: Int) {
         if (drawableStart != 0) {
             ediText?.compoundDrawables?.let {
                 DrawableCompat.setTint(
