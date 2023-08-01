@@ -26,6 +26,7 @@
     <string name="s_type">Tipo de cliente: %s</string>
 
     <string name="act_enter">Entrar</string>
+    <string name="act_out">Sair</string>
     <string name="act_register">Cadastrar</string>
     <string name="act_ok">OK</string>
 

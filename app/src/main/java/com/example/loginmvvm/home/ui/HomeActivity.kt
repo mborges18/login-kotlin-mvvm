@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.view.isVisible
 import com.example.loginmvvm.R
+import com.example.loginmvvm.access.AccessActivity
 import com.example.loginmvvm.common.result.ResultState
 import com.example.loginmvvm.databinding.ActivityHomeBinding
 import com.example.loginmvvm.home.model.CustomerModel
@@ -21,6 +22,7 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         handlerUiStateObserver()
+        handlerLogout()
     }
 
     private fun handlerUiStateObserver() {
@@ -32,6 +34,12 @@ class HomeActivity : AppCompatActivity() {
                 is ResultState.Success -> handlerSuccess(it.data)
                 is ResultState.Error -> handlerError()
                 else -> handlerFailure()
+            }
+        }
+
+        viewModel.logout.observe(this) {
+            if (it) {
+                startActivity(AccessActivity.newIntent(this))
             }
         }
     }
@@ -61,6 +69,12 @@ class HomeActivity : AppCompatActivity() {
 
     private fun handlerFailure() {
         handlerHideLoading()
+    }
+
+    private fun handlerLogout() {
+        binding.btnLogout.setClickListener {
+            viewModel.logout()
+        }
     }
 
     companion object {
