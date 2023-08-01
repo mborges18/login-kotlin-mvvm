@@ -70,4 +70,16 @@
         android:visibility="gone"
         tools:visibility="visible" />
 
+        <com.compdesign.compbutton.CompPrimeButton
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:comp_prime_icon="@drawable/ic_new_logout"
+            app:comp_prime_text="@string/act_out"
+            android:layout_marginTop="@dimen/space_16dp"
+            android:layout_marginBottom="@dimen/space_16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
