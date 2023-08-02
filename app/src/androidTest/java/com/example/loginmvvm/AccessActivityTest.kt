@@ -1,25 +1,21 @@
 package com.example.loginmvvm
 
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.action.ViewActions.replaceText
-import androidx.test.espresso.action.ViewActions.scrollTo
-import androidx.test.espresso.action.ViewActions.typeText
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
-import com.example.loginmvvm.AccessActivityRobot.getModuleData
+import com.example.loginmvvm.AccessActivityAction.checkInvalidFieldsSignIn
+import com.example.loginmvvm.AccessActivityAction.checkHeaderSignIn
+import com.example.loginmvvm.AccessActivityModule.getModuleSignUpSuccess
+import com.example.loginmvvm.AccessActivityAction.checkHeaderSignUp
+import com.example.loginmvvm.AccessActivityAction.clickButtonSignIn
+import com.example.loginmvvm.AccessActivityAction.clickButtonSignUp
+import com.example.loginmvvm.AccessActivityAction.clickTabSignUp
+import com.example.loginmvvm.AccessActivityAction.typeInvalidDataSignIn
+import com.example.loginmvvm.AccessActivityAction.typeDataSignUp
+import com.example.loginmvvm.AccessActivityAction.typeValidDataSignIn
+import com.example.loginmvvm.AccessActivityModule.getModuleSignInSuccess
 import com.example.loginmvvm.access.AccessActivity
-import com.compdesign.R as RC
 import io.mockk.clearAllMocks
-import org.hamcrest.core.AllOf.allOf
-import org.junit.After
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.Rule
@@ -33,51 +29,32 @@ class AccessActivityTest {
     @get:Rule
     val accessScenarioRule = ActivityScenarioRule(AccessActivity::class.java)
 
-    @Before
-    fun setUp() {
-        loadKoinModules(getModuleData())
-    }
+    @Test
+    fun flow_make_signUp_to_signIn_success() {
+        loadKoinModules(getModuleSignUpSuccess())
 
-    @After
-    fun setDown() {
+        clickTabSignUp()
+        checkHeaderSignUp()
+        typeDataSignUp()
+        clickButtonSignUp()
+        clickButtonSignIn()
+
         clearAllMocks()
         stopKoin()
     }
 
     @Test
-    fun flowMakeSignUpToSignIn() {
-        onView(withId(R.id.tab_access)).check(matches(isDisplayed()))
+    fun flow_to_make_signIn_with_invalid_data_to_signIn_success() {
+        loadKoinModules(getModuleSignInSuccess())
 
-        onView(withText("CADASTRAR")).perform(click())
-        onView(withId(R.id.edt_name)).perform(typeText("Marcio Borges"))
-        onView(withId(R.id.edt_birthdate)).perform(typeText("18111981"))
-        onView(withId(R.id.edt_phone)).perform(scrollTo(), typeText("81986201853"))
-        onView(withId(R.id.edt_email)).perform(scrollTo(), typeText("marcioorges18@gmail.com"))
-        onView(withText("Prata")).perform(scrollTo(), click())
-        onView(withId(R.id.edt_password)).perform(scrollTo(), typeText("A@123456"))
-        onView(withId(R.id.edt_confirm_password)).perform(scrollTo(), typeText("A@123456"))
+        checkHeaderSignIn()
+        typeInvalidDataSignIn()
+        clickButtonSignIn()
+        checkInvalidFieldsSignIn()
+        typeValidDataSignIn()
+        clickButtonSignIn()
 
-        onView(withId(R.id.btn_signup)).perform(scrollTo(), click())
-
-        onView(withId(R.id.btn_signin)).perform(scrollTo(), click())
-    }
-
-    @Test
-    fun flowMakeSignInvalidData() {
-        onView(withId(R.id.edt_email)).perform(scrollTo(), typeText("marcioorges18gmail.com"))
-        onView(withId(R.id.edt_password)).perform(scrollTo(), typeText("56f"))
-        onView(withId(R.id.btn_signin)).perform(scrollTo(), click())
-
-        onView(withId(R.id.edt_email)).perform(scrollTo())
-        onView(allOf(withId(RC.id.tvError), isDescendantOfA(withId(R.id.cdt_email))))
-            .check(matches(withText("Campo inválido")))
-
-        onView(withId(R.id.edt_password)).perform(scrollTo())
-        onView(allOf(withId(RC.id.tvError), isDescendantOfA(withId(R.id.cdt_password))))
-            .check(matches(withText("Campo inválido")))
-
-        onView(withId(R.id.edt_email)).perform(scrollTo(), replaceText("marcioorges18@gmail.com"))
-        onView(withId(R.id.edt_password)).perform(scrollTo(), replaceText("A@123456"))
-        onView(withId(R.id.btn_signin)).perform(scrollTo(), click())
+        clearAllMocks()
+        stopKoin()
     }
 }

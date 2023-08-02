@@ -50,12 +50,12 @@ class CompPrimeButton @JvmOverloads constructor(
     }
 
     fun bindEnabled(it: Boolean) {
-        binding.root.isClickable = it
-        binding.root.isFocusable = it
+        binding.cvButton.isClickable = it
+        binding.cvButton.isFocusable = it
         if (it) {
-            binding.root.setCardBackgroundColor(ContextCompat.getColor(context, R.color.blue))
+            binding.cvButton.setCardBackgroundColor(ContextCompat.getColor(context, R.color.blue))
         } else {
-            binding.root.setCardBackgroundColor(ContextCompat.getColor(context, R.color.colorGrayLight))
+            binding.cvButton.setCardBackgroundColor(ContextCompat.getColor(context, R.color.colorGrayLight))
         }
     }
 
@@ -92,7 +92,7 @@ class CompPrimeButton @JvmOverloads constructor(
     }
 
     private fun doListener(onClick: (() -> Unit)? = null) {
-        binding.root.setOnClickListener {
+        binding.cvButton.setOnClickListener {
             onClick?.invoke()
         }
     }
