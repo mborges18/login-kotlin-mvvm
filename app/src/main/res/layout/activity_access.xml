@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent">
 
 <androidx.cardview.widget.CardView
-    android:id="@+id/cvTabs"
+    android:id="@+id/cv_tabs"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/space_16dp"
@@ -19,7 +18,7 @@ android:layout_height="match_parent">
     app:cardCornerRadius="8dp">
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabAccess"
+        android:id="@+id/tab_access"
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:visibility="visible"
@@ -35,27 +34,18 @@ android:layout_height="match_parent">
         app:tabTextAppearance="@style/TabText"
         app:tabTextColor="@color/black">
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="TEXT" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="TEXT" />
     </com.google.android.material.tabs.TabLayout>
 
 </androidx.cardview.widget.CardView>
 
 <androidx.viewpager2.widget.ViewPager2
-    android:id="@+id/viewPagerAccess"
+    android:id="@+id/view_pager_access"
     android:layout_width="match_parent"
-    android:layout_height="0dp"
+    android:layout_height="@dimen/space_0dp"
     app:layout_anchorGravity="bottom"
     app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/cvTabs" />
+    app:layout_constraintTop_toBottomOf="@+id/cv_tabs" />
 </androidx.constraintlayout.widget.ConstraintLayout>

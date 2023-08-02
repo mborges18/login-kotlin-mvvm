@@ -47,6 +47,12 @@ android {
         }
         execution 'ANDROIDX_TEST_ORCHESTRATOR'
     }
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+        jniLibs {
+            useLegacyPackaging = true
+        }
+    }
 
 }
 
@@ -119,6 +125,7 @@ dependencies {
 
     //Mockk
     testImplementation 'io.mockk:mockk:1.13.3'
+    androidTestImplementation 'io.mockk:mockk-android:1.13.3'
 
     //Mock webservice
     def mock_webserver_version= "4.10.0"
