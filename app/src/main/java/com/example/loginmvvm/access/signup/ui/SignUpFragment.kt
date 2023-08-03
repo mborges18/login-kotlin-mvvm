@@ -136,8 +136,8 @@ class SignUpFragment: Fragment() {
             email = model.email
             password = model.password
         }?.also {
-            handlerClearFields()
             it.gotoSignIn()
+            handlerClearFields()
         }
     }
 

@@ -10,7 +10,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 object SignUpModule {
-    val instance = module {
+    val instance get() = module {
         single { ApiClient.init(SignUpApi::class.java) }
         factory<SignUpRepository> { SignUpRepositoryImpl(api = get()) }
         factory { SignUpModel() }

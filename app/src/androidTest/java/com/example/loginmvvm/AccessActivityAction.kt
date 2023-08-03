@@ -1,5 +1,8 @@
 package com.example.loginmvvm
 
+import androidx.test.espresso.Espresso
+import androidx.test.espresso.Espresso.closeSoftKeyboard
+import com.example.loginmvvm.ActionsRobot.checkDialogIsVisible
 import com.example.loginmvvm.ActionsRobot.checkIdDescendantWithText
 import com.example.loginmvvm.ActionsRobot.checkTextIsDisplayed
 import com.example.loginmvvm.ActionsRobot.clickOnText
@@ -29,14 +32,11 @@ object AccessActivityAction {
         clickOnText(text = "Prata")
         typeTextOnId(id = R.id.edt_password, text = "A@123456")
         typeTextOnId(id = R.id.edt_confirm_password, text = "A@123456")
+        closeSoftKeyboard()
     }
 
     fun clickButtonSignUp() {
         clickOnId(id = R.id.btn_signup)
-    }
-
-    fun clickButtonSignIn() {
-        clickOnId(id = R.id.btn_signin)
     }
 
     // * SIGNIN
@@ -49,6 +49,7 @@ object AccessActivityAction {
     fun typeInvalidDataSignIn() {
         typeTextOnId(id = R.id.edt_email, text = "marcioorges18gmail.com")
         typeTextOnId(id = R.id.edt_password, text = "A56")
+        closeSoftKeyboard()
     }
 
     fun checkInvalidFieldsSignIn() {
@@ -65,7 +66,59 @@ object AccessActivityAction {
     }
 
     fun typeValidDataSignIn() {
+        replaceTextOnId(id = R.id.edt_email, text = "")
+        replaceTextOnId(id = R.id.edt_password, text = "")
+        typeTextOnId(id = R.id.edt_email, text = "marcioorges18@gmail.com")
+        typeTextOnId(id = R.id.edt_password, text = "A@123456")
+        closeSoftKeyboard()
+    }
+
+    fun typeDataNotfoundSignIn() {
+        replaceTextOnId(id = R.id.edt_email, text = "")
+        replaceTextOnId(id = R.id.edt_password, text = "")
+        typeTextOnId(id = R.id.edt_email, text = "mm@gmail.com")
+        typeTextOnId(id = R.id.edt_password, text = "963258")
+        closeSoftKeyboard()
+    }
+
+    fun insertDataSignIn() {
         replaceTextOnId(id = R.id.edt_email, text = "marcioorges18@gmail.com")
         replaceTextOnId(id = R.id.edt_password, text = "A@123456")
     }
+
+    fun clickButtonSignIn() {
+        clickOnId(id = R.id.btn_signin)
+    }
+
+    // * MESSAGES
+    fun checkMessageEmailExists() {
+        checkDialogIsVisible(text = "E-mail já registrado. Informe outro e-mail, por favor!")
+    }
+
+    fun checkMessageError() {
+        checkDialogIsVisible(text = "Ops! Ocorreu um erro inesperado, tente novamente mais tarde, por favor!")
+    }
+
+    fun checkMessageFailure() {
+        checkDialogIsVisible(text = "Ops! Ocorreu um erro na rede, por favor, verifique sua conexão!")
+    }
+
+    fun checkMessageEmailNotFound() {
+        checkIdDescendantWithText(
+            idParent = R.id.cdt_email,
+            idChild = RC.id.tvError,
+            text = "Usuário ou senha inválido"
+        )
+        checkIdDescendantWithText(
+            idParent = R.id.cdt_password,
+            idChild = RC.id.tvError,
+            text = "Usuário ou senha inválido"
+        )
+    }
+
+    fun clearFieldsSignIn() {
+        replaceTextOnId(id = R.id.edt_email, text = "")
+        replaceTextOnId(id = R.id.edt_password, text = "")
+    }
+
 }

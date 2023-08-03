@@ -9,7 +9,6 @@ import com.example.loginmvvm.access.signup.model.TypeMemberEnum
 import com.example.loginmvvm.access.signup.model.TypeStatusEnum
 import com.example.loginmvvm.access.signup.ui.SignUpViewModel
 import com.example.loginmvvm.common.result.ResultState
-import io.mockk.coEvery
 import io.mockk.mockk
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
@@ -17,36 +16,113 @@ import org.koin.dsl.module
 
 object AccessActivityModule {
 
-    private var signUpRepository: SignUpRepository = mockk()
-    private lateinit var signUpModel: SignUpModel
-
-    private var signInRepository: SignInRepository = mockk()
-    private lateinit var signInModel: SignInModel
+    private lateinit var signUpRepository: SignUpRepository
+    private lateinit var signInRepository: SignInRepository
 
     fun getModuleSignUpSuccess(): Module {
-        setSignUpModel()
-
-        val result: ResultState<SignUpModel> = ResultState.Success(signUpModel)
-        coEvery { signUpRepository.signUp(model = signUpModel) } returns result
+        signUpRepository = object : SignUpRepository {
+            override suspend fun signUp(model: SignUpModel): ResultState<SignUpModel> {
+                return ResultState.Success(getSignUpModel())
+            }
+        }
 
         return module {
-            viewModel { SignUpViewModel(signUpRepository, signUpModel) }
+            viewModel { SignUpViewModel(signUpRepository, SignUpModel()) }
         }
     }
 
     fun getModuleSignInSuccess(): Module {
-        setSignInModel()
-
-        val result: ResultState<Boolean> = ResultState.Success(true)
-        coEvery { signInRepository.signIn(model = signInModel, keepLogged = true) } returns result
+        signInRepository = object : SignInRepository {
+            override suspend fun signIn(
+                model: SignInModel,
+                keepLogged: Boolean
+            ): ResultState<Boolean> {
+                return ResultState.Success(true)
+            }
+        }
 
         return module {
-            viewModel { SignInViewModel(signInRepository, signInModel) }
+            viewModel { SignInViewModel(signInRepository, SignInModel()) }
         }
     }
 
-    private fun setSignUpModel() {
-        signUpModel = SignUpModel(
+    fun getModuleSignInExists(): Module {
+        signInRepository = object : SignInRepository {
+            override suspend fun signIn(
+                model: SignInModel,
+                keepLogged: Boolean
+            ): ResultState<Boolean> {
+                return ResultState.Exists
+            }
+        }
+
+        val signInViewModel = SignInViewModel(signInRepository, SignInModel())
+
+        return module {
+            //factory { signInRepository }
+           // factory { SignInModel() }
+            viewModel { signInViewModel }
+        }
+    }
+
+    fun getModuleSignInError(): Module {
+        signInRepository = object : SignInRepository {
+            override suspend fun signIn(
+                model: SignInModel,
+                keepLogged: Boolean
+            ): ResultState<Boolean> {
+                return ResultState.Error
+            }
+        }
+
+        val signInViewModel = SignInViewModel(signInRepository, SignInModel())
+
+        return module {
+            //factory { signInRepository }
+            //factory { SignInModel() }
+            viewModel { signInViewModel }
+        }
+    }
+
+    fun getModuleSignInNotFound(): Module {
+        signInRepository = object : SignInRepository {
+            override suspend fun signIn(
+                model: SignInModel,
+                keepLogged: Boolean
+            ): ResultState<Boolean> {
+                return ResultState.NotFound
+            }
+        }
+
+        val signInViewModel = SignInViewModel(signInRepository, SignInModel())
+
+        return module {
+            //factory { signInRepository }
+            //factory { SignInModel() }
+            viewModel { signInViewModel }
+        }
+    }
+
+    fun getModuleSignInFailure(): Module {
+        signInRepository = object : SignInRepository {
+            override suspend fun signIn(
+                model: SignInModel,
+                keepLogged: Boolean
+            ): ResultState<Boolean> {
+                return ResultState.Failure
+            }
+        }
+
+        val signInViewModel = SignInViewModel(signInRepository, SignInModel())
+
+        return module {
+            //factory { signInRepository }
+            //factory { SignInModel() }
+            viewModel { signInViewModel }
+        }
+    }
+
+    private fun getSignUpModel() = SignUpModel(
             name = "Marcio Borges",
             birthDate = "18/11/1981",
             email = "marcioorges18@gmail.com",
@@ -56,12 +132,9 @@ object AccessActivityModule {
             password = "A@123456",
             confirmPassword = "A@123456"
         )
-    }
 
-    private fun setSignInModel() {
-        signInModel = SignInModel(
-            email = "A@123456",
-            password = "marcioorges18@gmail.com"
+    private fun getSignInModel() = SignInModel(
+            email = "marcioorges18@gmail.com",
+            password = "A@123456"
         )
-    }
 }

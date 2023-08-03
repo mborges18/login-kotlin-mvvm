@@ -7,6 +7,7 @@ import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.action.ViewActions.scrollTo
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.RootMatchers.isDialog
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.isEnabled
@@ -74,5 +75,12 @@ object ActionsRobot {
 
     fun replaceTextOnId(@IdRes id: Int, text: String) {
         onView(withId(id)).perform(scrollTo(), replaceText(text))
+    }
+
+    fun checkDialogIsVisible(text: String) {
+        onView(withText(text))
+            .inRoot(isDialog())
+            .check(matches(isDisplayed()))
+            .perform(click())
     }
 }
