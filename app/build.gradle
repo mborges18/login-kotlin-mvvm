@@ -53,7 +53,6 @@ android {
             useLegacyPackaging = true
         }
     }
-
 }
 
 dependencies {
@@ -78,7 +77,7 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
 
     //ViewModel
-    def lifecycle_version= "2.6.1"
+    def lifecycle_version = "2.6.1"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
@@ -90,22 +89,22 @@ dependencies {
     implementation "io.insert-koin:koin-android:$koin_version"
 
     //Coroutines
-    def coroutines_version= "1.7.1"
+    def coroutines_version = "1.7.1"
     //noinspection GradleDependency
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
 
     /**
-       TESTS
-    */
+     *  TESTS
+     */
 
     //Junit
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
 
     //Espresso
-    def espresso_version= "3.5.1"
+    def espresso_version = "3.5.1"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$espresso_version"
 
@@ -119,8 +118,8 @@ dependencies {
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1'
 
     //Fragment
-    debugImplementation ('androidx.fragment:fragment-testing:1.6.0'){
-        exclude group:'androidx.test', module:'monitor'
+    debugImplementation('androidx.fragment:fragment-testing:1.6.1') {
+        exclude group: 'androidx.test', module: 'monitor'
     }
 
     //Mockk
@@ -128,7 +127,7 @@ dependencies {
     androidTestImplementation 'io.mockk:mockk-android:1.13.3'
 
     //Mock webservice
-    def mock_webserver_version= "4.10.0"
+    def mock_webserver_version = "4.10.0"
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.2"))
     testImplementation "com.squareup.okhttp3:mockwebserver:$mock_webserver_version"
     androidTestImplementation "com.squareup.okhttp3:mockwebserver:$mock_webserver_version"
@@ -139,10 +138,12 @@ dependencies {
     debugImplementation 'androidx.test:monitor:1.6.1'
     androidTestImplementation 'org.hamcrest:hamcrest:2.2'
 
-    //-------------
     testImplementation "androidx.test:core-ktx:1.5.0"
     implementation "androidx.test:core:1.5.0"
     androidTestImplementation "androidx.test:core-ktx:1.5.0"
 
     androidTestUtil "androidx.test:orchestrator:1.4.2"
+
+    testImplementation "io.insert-koin:koin-test:$koin_version"
+    androidTestImplementation "io.insert-koin:koin-test-junit4:$koin_version"
 }
