@@ -145,7 +145,7 @@ class SignUpFragment: Fragment() {
         handlerHideLoading()
         Message().dialog(
             requireContext(),
-            Message.EType.ERROR,
+            Message.EType.WARN,
             getString(R.string.msg_error_user_exists)
         )
     }

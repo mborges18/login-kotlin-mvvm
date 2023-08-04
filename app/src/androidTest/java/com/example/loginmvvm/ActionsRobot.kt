@@ -81,6 +81,11 @@ object ActionsRobot {
         onView(withText(text))
             .inRoot(isDialog())
             .check(matches(isDisplayed()))
+    }
+
+    fun closeDialog(@IdRes id: Int,) {
+        onView(withId(id))
+            .inRoot(isDialog())
             .perform(click())
     }
 }
