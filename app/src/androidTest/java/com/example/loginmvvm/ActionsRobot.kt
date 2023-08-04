@@ -8,55 +8,37 @@ import androidx.test.espresso.action.ViewActions.scrollTo
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.RootMatchers.isDialog
-import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.isEnabled
-import androidx.test.espresso.matcher.ViewMatchers.isNotEnabled
+import androidx.test.espresso.matcher.ViewMatchers.isNotClickable
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import org.hamcrest.core.AllOf.allOf
 
 object ActionsRobot {
 
-    fun checkIdIsDisplayed(@IdRes id: Int) {
-        onView(withId(id)).perform(scrollTo()).check(matches(isDisplayed()))
+    fun checkTextIsDisplayed(text: String) {
+        onView(withText(text)).check(matches(isDisplayed()))
     }
 
-    fun checkTextIsDisplayed(text: String) {
+    fun checkTextIsDisplayedScrolling(text: String) {
         onView(withText(text)).perform(scrollTo()).check(matches(isDisplayed()))
     }
 
-    fun checkIdIsEnabled(@IdRes id: Int) {
-        onView(withId(id)).perform(scrollTo()).check(matches(isEnabled()))
-    }
-
-    fun checkIdIsNotEnabled(@IdRes id: Int) {
-        onView(withId(id)).perform(scrollTo()).check(matches(isNotEnabled()))
-    }
-
-    fun checkIdDescendantIsEnabled(@IdRes idParent: Int, @IdRes idChild: Int) {
+    fun checkIdDescendantIsNotClickable(@IdRes idParent: Int, @IdRes idChild: Int) {
         onView(
             allOf(
                 withId(idChild),
-                ViewMatchers.isDescendantOfA(withId(idParent))
+                isDescendantOfA(withId(idParent))
             )
-        ).perform(scrollTo()).check(matches(isEnabled()))
-    }
-
-    fun checkIdDescendantIsNotEnabled(@IdRes idParent: Int, @IdRes idChild: Int) {
-        onView(
-            allOf(
-                withId(idChild),
-                ViewMatchers.isDescendantOfA(withId(idParent))
-            )
-        ).perform(scrollTo()).check(matches(isNotEnabled()))
+        ).perform(scrollTo()).check(matches(isNotClickable()))
     }
 
     fun checkIdDescendantWithText(@IdRes idParent: Int, @IdRes idChild: Int, text: String) {
         onView(
             allOf(
                 withId(idChild),
-                ViewMatchers.isDescendantOfA(withId(idParent))
+                isDescendantOfA(withId(idParent))
             )
         ).perform(scrollTo()).check(matches(withText(text)))
     }

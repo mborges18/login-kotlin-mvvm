@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="type_members">
-        <item>Líder|true</item>
-        <item>Discípulo|false</item>
+        <item>Ouro|true</item>
+        <item>Prata|false</item>
+        <item>Bronze|false</item>
     </array>
 
     <array name="type_status">

@@ -3,9 +3,10 @@ package com.example.loginmvvm.access.signup
 import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
-import com.example.loginmvvm.AccessActivityAction
-import com.example.loginmvvm.AccessActivityModule
 import com.example.loginmvvm.access.AccessActivity
+import com.example.loginmvvm.access.CommonMessages
+import com.example.loginmvvm.access.signin.SignInAction
+import com.example.loginmvvm.access.signin.SignInModule
 import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,50 +24,63 @@ class SignUpFragmentTest : KoinTest {
     }
 
     @Test
-    fun flow_make_signUp_to_signIn_success() {
-        loadKoinModules(
-            listOf(
-                AccessActivityModule.getModuleSignUpSuccess(),
-                AccessActivityModule.getModuleSignInSuccess()
-            )
-        )
+    fun check_components_initial() {
+
         ActivityScenario.launch(AccessActivity::class.java)
-        AccessActivityAction.clickTabSignUp()
-        AccessActivityAction.typeDataSignUp()
-        AccessActivityAction.clickButtonSignUp()
-        AccessActivityAction.clickButtonSignIn()
+        SignUpAction.clickTabSignUp()
+        SignUpAction.checkHeaderSignUp()
+        SignUpAction.checkFieldsSignUp()
+        SignUpAction.checkButtonNotClickableSignUp()
     }
 
     @Test
-    fun flow_to_make_signUp_messages_error(){
-        loadKoinModules(AccessActivityModule.getModuleSignUpExists())
+    fun flow_make_signUp_to_signIn_success() {
+        loadKoinModules(
+            listOf(
+                SignUpModule.getModuleSignUpSuccess(),
+                SignInModule.getModuleSignInSuccess()
+            )
+        )
         ActivityScenario.launch(AccessActivity::class.java)
-        AccessActivityAction.clickTabSignUp()
-        AccessActivityAction.typeDataSignUp()
-        AccessActivityAction.clickButtonSignUp()
-        AccessActivityAction.checkMessageEmailExists()
+        SignUpAction.clickTabSignUp()
+        SignUpAction.typeDataSignUp()
+        SignUpAction.clickButtonSignUp()
+        SignInAction.clickButtonSignIn()
+    }
 
-        loadKoinModules(AccessActivityModule.getModuleSignUpError())
+    @Test
+    fun flow_to_make_signUp_messages_error() {
+        loadKoinModules(SignUpModule.getModuleSignUpExists())
         ActivityScenario.launch(AccessActivity::class.java)
-        AccessActivityAction.clickTabSignUp()
-        AccessActivityAction.typeDataSignUp()
-        AccessActivityAction.clickButtonSignUp()
-        AccessActivityAction.checkMessageError()
+        SignUpAction.clickTabSignUp()
+        SignUpAction.typeDataSignUp()
+        SignUpAction.clickButtonSignUp()
+        CommonMessages.checkMessageEmailExists()
 
-        loadKoinModules(AccessActivityModule.getModuleSignUpFailure())
+        loadKoinModules(SignUpModule.getModuleSignUpError())
         ActivityScenario.launch(AccessActivity::class.java)
-        AccessActivityAction.clickTabSignUp()
-        AccessActivityAction.typeDataSignUp()
-        AccessActivityAction.clickButtonSignUp()
-        AccessActivityAction.checkMessageFailure()
+        SignUpAction.clickTabSignUp()
+        SignUpAction.typeDataSignUp()
+        SignUpAction.clickButtonSignUp()
+        CommonMessages.checkMessageError()
 
-        loadKoinModules(AccessActivityModule.getModuleSignUpSuccess())
+        loadKoinModules(SignUpModule.getModuleSignUpFailure())
         ActivityScenario.launch(AccessActivity::class.java)
-        AccessActivityAction.clickTabSignUp()
-        AccessActivityAction.typeInvalidDataSignUp()
-        AccessActivityAction.clickButtonSignUp()
-        AccessActivityAction.checkInvalidFieldsSignUp()
-        AccessActivityAction.typeDataSignUp()
-        AccessActivityAction.clickButtonSignUp()
+        SignUpAction.clickTabSignUp()
+        SignUpAction.typeDataSignUp()
+        SignUpAction.clickButtonSignUp()
+        CommonMessages.checkMessageFailure()
+
+        loadKoinModules(SignUpModule.getModuleSignUpSuccess())
+        ActivityScenario.launch(AccessActivity::class.java)
+        SignUpAction.clickTabSignUp()
+        SignUpAction.typeInvalidDataSignUp()
+        SignUpAction.clickButtonSignUp()
+        SignUpAction.checkInvalidFieldsSignUp()
+        SignUpAction.typeDataDifferentPasswordsSignUp()
+        SignUpAction.clickButtonSignUp()
+        SignUpAction.checkDifferentPasswordsSignUp()
+        SignUpAction.typeDataSignUp()
+        SignUpAction.clickButtonSignUp()
     }
 }

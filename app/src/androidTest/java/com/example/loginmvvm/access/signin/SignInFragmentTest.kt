@@ -3,9 +3,8 @@ package com.example.loginmvvm.access.signin
 import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
-import com.example.loginmvvm.AccessActivityAction
-import com.example.loginmvvm.AccessActivityModule
 import com.example.loginmvvm.access.AccessActivity
+import com.example.loginmvvm.access.CommonMessages
 import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -22,31 +21,41 @@ class SignInFragmentTest {
     }
 
     @Test
+    fun check_components_initial() {
+        ActivityScenario.launch(AccessActivity::class.java)
+        SignInAction.checkTabSignIn()
+        SignInAction.checkHeaderSignIn()
+        SignInAction.checkFieldsSignIn()
+        SignInAction.checkButtonNotClickableSignIn()
+    }
+
+    @Test
     fun flow_to_make_signIn_messages_error() {
-        loadKoinModules(AccessActivityModule.getModuleSignInNotFound())
+        loadKoinModules(SignInModule.getModuleSignInNotFound())
         ActivityScenario.launch(AccessActivity::class.java)
-        AccessActivityAction.typeDataSignIn()
-        AccessActivityAction.clickButtonSignIn()
-        AccessActivityAction.checkMessageEmailNotFound()
+        SignInAction.typeDataSignIn()
+        SignInAction.clickButtonSignIn()
+        SignInAction.checkMessageEmailNotFound()
 
-        loadKoinModules(AccessActivityModule.getModuleSignInError())
+        loadKoinModules(SignInModule.getModuleSignInError())
         ActivityScenario.launch(AccessActivity::class.java)
-        AccessActivityAction.typeDataSignIn()
-        AccessActivityAction.clickButtonSignIn()
-        AccessActivityAction.checkMessageError()
+        SignInAction.typeDataSignIn()
+        SignInAction.clickButtonSignIn()
+        CommonMessages.checkMessageError()
 
-        loadKoinModules(AccessActivityModule.getModuleSignInFailure())
+        loadKoinModules(SignInModule.getModuleSignInFailure())
         ActivityScenario.launch(AccessActivity::class.java)
-        AccessActivityAction.typeDataSignIn()
-        AccessActivityAction.clickButtonSignIn()
-        AccessActivityAction.checkMessageFailure()
+        SignInAction.typeDataSignIn()
+        SignInAction.clickButtonSignIn()
+        CommonMessages.checkMessageFailure()
 
-        loadKoinModules(AccessActivityModule.getModuleSignInSuccess())
+        loadKoinModules(SignInModule.getModuleSignInSuccess())
         ActivityScenario.launch(AccessActivity::class.java)
-        AccessActivityAction.typeInvalidDataSignIn()
-        AccessActivityAction.clickButtonSignIn()
-        AccessActivityAction.checkInvalidFieldsSignIn()
-        AccessActivityAction.typeDataSignIn()
-        AccessActivityAction.clickButtonSignIn()
+        SignInAction.typeInvalidDataSignIn()
+        SignInAction.clickButtonSignIn()
+        SignInAction.checkInvalidFieldsSignIn()
+        SignInAction.typeDataSignIn()
+        SignInAction.clickButtonKeepLogged()
+        SignInAction.clickButtonSignIn()
     }
 }
