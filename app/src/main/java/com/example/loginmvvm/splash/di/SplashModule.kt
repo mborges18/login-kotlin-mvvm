@@ -12,6 +12,6 @@ object SplashModule {
     val instance = module {
         single<SplashCache> { SplashCacheImpl(cache = get()) }
         factory<SplashRepository> { SplashRepositoryImpl(splashCache = get()) }
-        viewModel { SplashViewModel(repository = get()) }
+        viewModel { SplashViewModel(repository = get(), timeDelay = 2000) }
     }
 }
