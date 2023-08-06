@@ -35,8 +35,8 @@ class AccessActivity : AppCompatActivity() {
 
         TabLayoutMediator(binding.tabAccess, binding.viewPagerAccess) { tab, position ->
             when (position) {
-                0 -> tab.text = getString(R.string.title_signin)
-                1 -> tab.text = getString(R.string.title_signup)
+                0 -> tab.text = getString(R.string.title_tab_signin)
+                1 -> tab.text = getString(R.string.title_tab_signup)
             }
         }.attach()
     }

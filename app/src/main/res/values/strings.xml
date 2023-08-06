@@ -2,8 +2,10 @@
     <string name="app_name">Login Mvvm</string>
     <string name="app_description">Desenvolvido em Kotlin</string>
 
-    <string name="title_signin">Acessar</string>
-    <string name="title_signup">Cadastrar</string>
+    <string name="title_signin">Acesso</string>
+    <string name="title_signup">Cadastro</string>
+    <string name="title_tab_signin">Acessar</string>
+    <string name="title_tab_signup">Cadastrar</string>
     <string name="title_home">Home</string>
     <string name="title_select_an_option">Selecione uma opção:</string>
 
