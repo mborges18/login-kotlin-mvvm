@@ -9,7 +9,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class SplashViewModel(
-    private val repository: SplashRepository
+    private val repository: SplashRepository,
+    private val timeDelay: Long? = null
 ): ViewModel() {
 
     private val _gotoHome: MutableLiveData<Unit> = MutableLiveData()
@@ -19,14 +20,10 @@ class SplashViewModel(
     val gotoAccess = _gotoAccess as LiveData<Unit>
 
     fun getKeepLogged() = viewModelScope.launch {
-        delay(TIME)
+        timeDelay?.let { delay(it) }
         when(repository.getKeepLogged()) {
             true -> _gotoHome.postValue(Unit)
             else -> _gotoAccess.postValue(Unit)
         }
-    }
-
-    companion object {
-        const val TIME: Long = 2000
     }
 }

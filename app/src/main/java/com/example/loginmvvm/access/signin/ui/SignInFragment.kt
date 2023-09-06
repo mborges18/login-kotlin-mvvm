@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.loginmvvm.home.ui.HomeActivity
+import androidx.navigation.fragment.findNavController
+import com.example.loginmvvm.home.ui.HomeFragment
 import com.example.loginmvvm.R
-import com.example.loginmvvm.access.AccessActivity
+import com.example.loginmvvm.access.main.AccessFragment
 import com.example.loginmvvm.common.message.Message
 import com.example.loginmvvm.common.result.ResultState
 import com.example.loginmvvm.databinding.FragmentSigninBinding
@@ -83,8 +84,7 @@ class SignInFragment: Fragment() {
     }
 
     private fun handlerDataSuccess() {
-        startActivity(HomeActivity.newIntent(requireContext()))
-        activity?.finish()
+        findNavController().navigate(R.id.action_navigation_access_to_navigation_home)
     }
 
     private fun handlerDataNotFound() = with(binding) {
@@ -113,11 +113,11 @@ class SignInFragment: Fragment() {
     private fun observerFillFieldsAfterSignUp() {
         viewModel.fillFieldsAfterSignUp.observe(viewLifecycleOwner) {
             if (it) {
-                val email  = (activity as AccessActivity).email
-                val password = (activity as AccessActivity).password
-                if (email.isNotEmpty() && password.isNotEmpty()) {
-                    binding.cdtEmail.setData(email)
-                    binding.cdtPassword.setData(password)
+                (parentFragment as AccessFragment).apply {
+                    if (email.isNotEmpty() && password.isNotEmpty()) {
+                        binding.cdtEmail.setData(email)
+                        binding.cdtPassword.setData(password)
+                    }
                 }
             }
         }

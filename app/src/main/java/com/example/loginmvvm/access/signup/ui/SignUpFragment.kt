@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.loginmvvm.R
-import com.example.loginmvvm.access.AccessActivity
+import com.example.loginmvvm.access.main.AccessFragment
 import com.example.loginmvvm.access.signup.model.SignUpModel
 import com.example.loginmvvm.access.signup.model.TypeMemberEnum
 import com.example.loginmvvm.common.message.Message
@@ -132,10 +132,10 @@ class SignUpFragment: Fragment() {
 
     private fun handlerDataSuccess(model: SignUpModel) {
         handlerHideLoading()
-        (activity as? AccessActivity)?.apply {
+        (parentFragment as AccessFragment).apply {
             email = model.email
             password = model.password
-        }?.also {
+        }.also {
             it.gotoSignIn()
             handlerClearFields()
         }

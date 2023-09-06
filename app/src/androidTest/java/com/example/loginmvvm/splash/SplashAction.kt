@@ -5,7 +5,7 @@ import com.example.loginmvvm.ActionsRobot
 object SplashAction {
 
     fun checkTitle() {
-        ActionsRobot.checkTextIsDisplayed("Login Mvvm")
+        ActionsRobot.checkTextIsDisplayed("LOGIN MVVM")
     }
 
     fun checkSubTitle() {

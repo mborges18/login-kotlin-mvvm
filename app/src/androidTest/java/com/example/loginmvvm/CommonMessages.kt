@@ -1,8 +1,7 @@
-package com.example.loginmvvm.access
+package com.example.loginmvvm
 
 import com.example.loginmvvm.ActionsRobot.checkDialogIsVisible
 import com.example.loginmvvm.ActionsRobot.closeDialog
-import com.example.loginmvvm.R
 
 object CommonMessages {
 

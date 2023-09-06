@@ -47,7 +47,6 @@ class SplashViewModelTest {
         coEvery { repository.getKeepLogged() } returns true
 
         viewModel.getKeepLogged()
-        delay(2000)
         coVerify { repository.getKeepLogged() }
     }
 
@@ -58,7 +57,6 @@ class SplashViewModelTest {
         coEvery { repository.getKeepLogged() } returns true
 
         viewModel.getKeepLogged()
-        delay(2000)
         verify { observerConnected.onChanged(Unit) }
     }
 
@@ -69,7 +67,6 @@ class SplashViewModelTest {
         coEvery { repository.getKeepLogged() } returns false
 
         viewModel.getKeepLogged()
-        delay(2000)
         verify { observerConnected.onChanged(Unit) }
     }
 }

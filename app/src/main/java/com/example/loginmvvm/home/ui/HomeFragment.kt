@@ -1,26 +1,34 @@
 package com.example.loginmvvm.home.ui
 
-import android.content.Context
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.loginmvvm.R
-import com.example.loginmvvm.access.AccessActivity
 import com.example.loginmvvm.common.result.ResultState
-import com.example.loginmvvm.databinding.ActivityHomeBinding
+import com.example.loginmvvm.databinding.FragmentHomeBinding
 import com.example.loginmvvm.home.model.CustomerModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeActivity : AppCompatActivity() {
+class HomeFragment : Fragment() {
 
-    private lateinit var binding: ActivityHomeBinding
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
     private val viewModel by viewModel<HomeViewModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         handlerUiStateObserver()
         handlerLogout()
     }
@@ -28,7 +36,7 @@ class HomeActivity : AppCompatActivity() {
     private fun handlerUiStateObserver() {
         viewModel.getCustomer()
 
-        viewModel.uiState.observe(this) {
+        viewModel.uiState.observe(viewLifecycleOwner) {
             when(it) {
                 is ResultState.Loading -> handlerShowLoading()
                 is ResultState.Success -> handlerSuccess(it.data)
@@ -37,9 +45,9 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.logout.observe(this) {
+        viewModel.logout.observe(viewLifecycleOwner) {
             if (it) {
-                startActivity(AccessActivity.newIntent(this))
+                findNavController().navigate(R.id.action_navigation_home_to_navigation_access)
             }
         }
     }
@@ -77,9 +85,8 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    companion object {
-        fun newIntent(context: Context): Intent = Intent(
-            context, HomeActivity::class.java
-        )
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

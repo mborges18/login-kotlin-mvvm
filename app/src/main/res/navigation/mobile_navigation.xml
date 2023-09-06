@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_splash">
+
+    <fragment
+        android:id="@+id/navigation_splash"
+        android:name="com.example.loginmvvm.splash.ui.SplashFragment"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_navigation_splash_to_navigation_access"
+            app:destination="@id/navigation_access"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/mobile_navigation"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_navigation_splash_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/mobile_navigation"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_access"
+        android:name="com.example.loginmvvm.access.main.AccessFragment"
+        tools:layout="@layout/fragment_access" >
+        <action
+            android:id="@+id/action_navigation_access_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@+id/mobile_navigation"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.loginmvvm.home.ui.HomeFragment"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_access"
+            app:destination="@id/navigation_access"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@+id/mobile_navigation"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+</navigation>

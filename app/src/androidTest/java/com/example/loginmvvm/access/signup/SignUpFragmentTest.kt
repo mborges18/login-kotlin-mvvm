@@ -3,10 +3,12 @@ package com.example.loginmvvm.access.signup
 import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
-import com.example.loginmvvm.access.AccessActivity
-import com.example.loginmvvm.access.CommonMessages
+import com.example.loginmvvm.CommonMessages
+import com.example.loginmvvm.MainActivity
 import com.example.loginmvvm.access.signin.SignInAction
 import com.example.loginmvvm.access.signin.SignInModule
+import com.example.loginmvvm.home.HomeModule
+import com.example.loginmvvm.splash.SplashModule
 import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -25,8 +27,8 @@ class SignUpFragmentTest : KoinTest {
 
     @Test
     fun check_components_initial() {
-
-        ActivityScenario.launch(AccessActivity::class.java)
+        loadKoinModules(SplashModule.getModuleSplashNotKeepLogged())
+        ActivityScenario.launch(MainActivity::class.java)
         SignUpAction.clickTabSignUp()
         SignUpAction.checkHeaderSignUp()
         SignUpAction.checkFieldsSignUp()
@@ -34,14 +36,16 @@ class SignUpFragmentTest : KoinTest {
     }
 
     @Test
-    fun flow_make_signUp_to_signIn_success() {
+    fun flow_signup_and_singin_success() {
         loadKoinModules(
             listOf(
+                SplashModule.getModuleSplashNotKeepLogged(),
                 SignUpModule.getModuleSignUpSuccess(),
-                SignInModule.getModuleSignInSuccess()
+                SignInModule.getModuleSignInSuccess(),
+                HomeModule.getModuleHomeDataCustomer()
             )
         )
-        ActivityScenario.launch(AccessActivity::class.java)
+        ActivityScenario.launch(MainActivity::class.java)
         SignUpAction.clickTabSignUp()
         SignUpAction.typeDataSignUp()
         SignUpAction.clickButtonSignUp()
@@ -49,38 +53,67 @@ class SignUpFragmentTest : KoinTest {
     }
 
     @Test
-    fun flow_to_make_signUp_messages_error() {
-        loadKoinModules(SignUpModule.getModuleSignUpExists())
-        ActivityScenario.launch(AccessActivity::class.java)
+    fun flow_signup_email_already_exists() {
+        loadKoinModules(
+            listOf(
+                SplashModule.getModuleSplashNotKeepLogged(),
+                SignUpModule.getModuleSignUpExists()
+            )
+        )
+        ActivityScenario.launch(MainActivity::class.java)
         SignUpAction.clickTabSignUp()
         SignUpAction.typeDataSignUp()
         SignUpAction.clickButtonSignUp()
         CommonMessages.checkMessageEmailExists()
+    }
 
-        loadKoinModules(SignUpModule.getModuleSignUpError())
-        ActivityScenario.launch(AccessActivity::class.java)
+    @Test
+    fun flow_signup_error() {
+        loadKoinModules(
+            listOf(
+                SplashModule.getModuleSplashNotKeepLogged(),
+                SignUpModule.getModuleSignUpError()
+            )
+        )
+        ActivityScenario.launch(MainActivity::class.java)
         SignUpAction.clickTabSignUp()
         SignUpAction.typeDataSignUp()
         SignUpAction.clickButtonSignUp()
         CommonMessages.checkMessageError()
+    }
 
-        loadKoinModules(SignUpModule.getModuleSignUpFailure())
-        ActivityScenario.launch(AccessActivity::class.java)
+    @Test
+    fun flow_signup_failure() {
+        loadKoinModules(
+            listOf(
+                SplashModule.getModuleSplashNotKeepLogged(),
+                SignUpModule.getModuleSignUpFailure()
+            )
+        )
+        ActivityScenario.launch(MainActivity::class.java)
         SignUpAction.clickTabSignUp()
         SignUpAction.typeDataSignUp()
         SignUpAction.clickButtonSignUp()
         CommonMessages.checkMessageFailure()
+    }
 
-        loadKoinModules(SignUpModule.getModuleSignUpSuccess())
-        ActivityScenario.launch(AccessActivity::class.java)
+    @Test
+    fun flow_signup_invalid_fields() {
+        loadKoinModules(SplashModule.getModuleSplashNotKeepLogged())
+        ActivityScenario.launch(MainActivity::class.java)
         SignUpAction.clickTabSignUp()
         SignUpAction.typeInvalidDataSignUp()
         SignUpAction.clickButtonSignUp()
         SignUpAction.checkInvalidFieldsSignUp()
+    }
+
+    @Test
+    fun flow_signup_different_passwords() {
+        loadKoinModules(SplashModule.getModuleSplashNotKeepLogged())
+        ActivityScenario.launch(MainActivity::class.java)
+        SignUpAction.clickTabSignUp()
         SignUpAction.typeDataDifferentPasswordsSignUp()
         SignUpAction.clickButtonSignUp()
         SignUpAction.checkDifferentPasswordsSignUp()
-        SignUpAction.typeDataSignUp()
-        SignUpAction.clickButtonSignUp()
     }
 }
