@@ -17,3 +17,6 @@ https://console.catalyst.zoho.com
 - Android Gradle Plugin (AGP) 8.0.2
 - Gradle 8.0
 - Coroutines 1.6.4
+
+## Proteção
+https://licelus.com/products/dexprotector
